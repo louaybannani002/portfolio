@@ -86,6 +86,12 @@ Experience and are also showcased as projects (6 in total).
 See Experience #1 and #2. Metrics: six MCP-based sub-agents, 21 n8n workflows, forecast error 9% MAPE.
 Stack (from those bullets): OpenAI Agent Builder, ChatKit, MCP, n8n, Python, Flask, Prophet, PostgreSQL, REST APIs, Twilio WhatsApp.
 
+Architecture diagram (provided by Louay):
+- Channels: Twilio WhatsApp · OpenAI Agent Builder / ChatKit
+- Orchestration: Orchestrator
+- Six MCP sub-agents: Inventory · HACCP · Suppliers · HR · Production · Forecasting
+- Automation & services: 21 n8n workflows · Flask + Prophet (forecasting service) · Proactive alerts (kitchen and stock teams)
+
 ### 2. CNN-based Invoice OCR (from Experience — Proxym, 2025)
 See Experience #3. Metric: field-level accuracy 93%.
 Stack (from those bullets): CNN (deep learning), OpenCV, JSON export.
@@ -104,8 +110,19 @@ Stack (from those bullets): CNN (deep learning), OpenCV, JSON export.
 ### 6. Time Series Forecasting | Python, ARIMA, SARIMA, Prophet (2023)
 - Applied decomposition and stationarity testing, then benchmarked ARIMA, SARIMA, and Prophet using RMSE and MAE to select the best model.
 
+### Filter tabs
+
+All · LLM & Agents · Computer Vision · Deep Learning · Forecasting · NLP/RecSys
+
+- PrediBot → LLM & Agents, Forecasting
+- CNN-based Invoice OCR → Computer Vision, Deep Learning
+- RAG-Based HR Assistant → LLM & Agents, NLP/RecSys
+- Speech Emotion Recognition (CNN) → Deep Learning
+- Hybrid Movie Recommendation System → NLP/RecSys
+- Time Series Forecasting → Forecasting
+
 ### Coming soon
-3 placeholder slots (no content yet).
+3 placeholder slots, shown as "New project coming soon" cards.
 
 ---
 
@@ -154,6 +171,6 @@ The CV does not contain these. They are left empty (`""` / `[]`) in `data/` unti
 - [ ] **Hero roles** beyond the CV title "Data Science & AI/ML Engineer" (rotating words, if wanted)
 - [ ] **Contact section text** (heading + short invitation paragraph)
 - [ ] **Footer text**
-- [ ] **Per-project:** tagline, problem, solution, pipeline steps, GitHub URL, demo URL, images
+- [ ] **Per-project:** tagline, overview, problem, solution, GitHub URL, demo URL, images
 - [ ] **Certificates:** issuer confirmation for "Data Science Bootcamp", and credential URLs for all
 - [ ] **Coming-soon slots:** titles/descriptions (optional)

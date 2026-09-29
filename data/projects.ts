@@ -5,6 +5,53 @@
 
 export type ProjectStatus = "published" | "coming-soon";
 
+/** Filter tabs on the home page. A project can appear under several. */
+export type ProjectFilterId =
+  | "llm-agents"
+  | "computer-vision"
+  | "deep-learning"
+  | "forecasting"
+  | "nlp-recsys";
+
+export const projectFilters: { id: ProjectFilterId; label: string }[] = [
+  { id: "llm-agents", label: "LLM & Agents" },
+  { id: "computer-vision", label: "Computer Vision" },
+  { id: "deep-learning", label: "Deep Learning" },
+  { id: "forecasting", label: "Forecasting" },
+  { id: "nlp-recsys", label: "NLP/RecSys" },
+];
+
+/** Icons available to architecture diagram nodes (mapped in components/projects/ArchitectureDiagram). */
+export type ArchitectureIcon =
+  | "whatsapp"
+  | "chat"
+  | "bot"
+  | "inventory"
+  | "haccp"
+  | "suppliers"
+  | "hr"
+  | "production"
+  | "forecast"
+  | "workflow"
+  | "server"
+  | "alert"
+  | "database"
+  | "api"
+  | "model"
+  | "document";
+
+export interface ArchitectureNode {
+  title: string;
+  subtitle?: string;
+  icon?: ArchitectureIcon;
+}
+
+/** One horizontal tier of the diagram. A tier with a single node is drawn as the central hub. */
+export interface ArchitectureLayer {
+  label: string;
+  nodes: ArchitectureNode[];
+}
+
 export interface ProjectMetric {
   value: string;
   label: string;
@@ -20,10 +67,16 @@ export interface Project {
   context: string;
   status: ProjectStatus;
   featured: boolean;
+  /** Filter tabs this project appears under. */
+  filters: ProjectFilterId[];
+  overview: string;
   problem: string;
   solution: string;
   features: string[];
+  /** Rendered as an animated step-by-step pipeline (when no `architecture`). */
   pipelineSteps?: string[];
+  /** Layered architecture diagram, drawn top → bottom with animated connectors. */
+  architecture?: ArchitectureLayer[];
   metrics: ProjectMetric[];
   techStack: string[];
   githubUrl: string;
@@ -46,6 +99,8 @@ export const projects: Project[] = [
     context: "Internship — PrendsTaPart",
     status: "published",
     featured: true,
+    filters: ["llm-agents", "forecasting"],
+    overview: "", // TODO (CONTENT.md → Missing)
     problem: "", // TODO (CONTENT.md → Missing)
     solution: "", // TODO (CONTENT.md → Missing)
     features: [
@@ -56,6 +111,38 @@ export const projects: Project[] = [
       "Led the design and first prototype of PrediBot, an AI agent for restaurant management combining sales forecasting, inventory optimization, and HACCP anomaly detection.",
       "Automated data ingestion and processing pipelines with n8n, storing curated data in PostgreSQL.",
       "Trained predictive models for sales, stock levels, and temperature anomalies, and exposed results through REST APIs for real-time alerts.",
+    ],
+    architecture: [
+      {
+        label: "Channels",
+        nodes: [
+          { title: "Twilio WhatsApp", icon: "whatsapp" },
+          { title: "OpenAI Agent Builder / ChatKit", icon: "chat" },
+        ],
+      },
+      {
+        label: "Orchestration",
+        nodes: [{ title: "Orchestrator", icon: "bot" }],
+      },
+      {
+        label: "Six MCP sub-agents",
+        nodes: [
+          { title: "Inventory", icon: "inventory" },
+          { title: "HACCP", icon: "haccp" },
+          { title: "Suppliers", icon: "suppliers" },
+          { title: "HR", icon: "hr" },
+          { title: "Production", icon: "production" },
+          { title: "Forecasting", icon: "forecast" },
+        ],
+      },
+      {
+        label: "Automation & services",
+        nodes: [
+          { title: "21 n8n workflows", icon: "workflow" },
+          { title: "Flask + Prophet", subtitle: "Forecasting service", icon: "server" },
+          { title: "Proactive alerts", subtitle: "Kitchen and stock teams", icon: "alert" },
+        ],
+      },
     ],
     metrics: [
       { value: "6", label: "MCP-based sub-agents" },
@@ -88,6 +175,8 @@ export const projects: Project[] = [
     context: "Internship — Proxym",
     status: "published",
     featured: true,
+    filters: ["computer-vision", "deep-learning"],
+    overview: "", // TODO (CONTENT.md → Missing)
     problem: "", // TODO (CONTENT.md → Missing)
     solution: "", // TODO (CONTENT.md → Missing)
     features: [
@@ -113,6 +202,8 @@ export const projects: Project[] = [
     context: "",
     status: "published",
     featured: true,
+    filters: ["llm-agents", "nlp-recsys"],
+    overview: "", // TODO (CONTENT.md → Missing)
     problem: "", // TODO (CONTENT.md → Missing)
     solution: "", // TODO (CONTENT.md → Missing)
     features: [
@@ -136,6 +227,8 @@ export const projects: Project[] = [
     context: "",
     status: "published",
     featured: false,
+    filters: ["deep-learning"],
+    overview: "", // TODO (CONTENT.md → Missing)
     problem: "", // TODO (CONTENT.md → Missing)
     solution: "", // TODO (CONTENT.md → Missing)
     features: [
@@ -162,6 +255,8 @@ export const projects: Project[] = [
     context: "",
     status: "published",
     featured: false,
+    filters: ["nlp-recsys"],
+    overview: "", // TODO (CONTENT.md → Missing)
     problem: "", // TODO (CONTENT.md → Missing)
     solution: "", // TODO (CONTENT.md → Missing)
     features: [
@@ -183,6 +278,8 @@ export const projects: Project[] = [
     context: "",
     status: "published",
     featured: false,
+    filters: ["forecasting"],
+    overview: "", // TODO (CONTENT.md → Missing)
     problem: "", // TODO (CONTENT.md → Missing)
     solution: "", // TODO (CONTENT.md → Missing)
     features: [
@@ -212,6 +309,8 @@ export const projects: Project[] = [
       context: "",
       status: "coming-soon",
       featured: false,
+      filters: [],
+      overview: "",
       problem: "",
       solution: "",
       features: [],
@@ -231,3 +330,13 @@ export const comingSoonProjects = projects.filter((p) => p.status === "coming-so
 
 export const getProjectBySlug = (slug: string) =>
   projects.find((p) => p.slug === slug && p.status === "published");
+
+/** Previous / next published project (wraps around) for detail-page navigation. */
+export function getAdjacentProjects(slug: string) {
+  const i = publishedProjects.findIndex((p) => p.slug === slug);
+  const n = publishedProjects.length;
+  return {
+    previous: publishedProjects[(i - 1 + n) % n],
+    next: publishedProjects[(i + 1) % n],
+  };
+}

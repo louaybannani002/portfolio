@@ -22,6 +22,30 @@ export const getNavLink = (id: SectionId) => navLinks.find((l) => l.id === id)!;
 
 export const downloadCvLabel = "Download CV";
 
+export const projectLabels = {
+  filterAll: "All",
+  filterAriaLabel: "Filter projects by category",
+  caseStudy: "Case study",
+  github: "GitHub",
+  demo: "Live demo",
+  comingSoon: "New project coming soon",
+  moreProjects: "More projects",
+  backToProjects: "All projects",
+  previous: "Previous project",
+  next: "Next project",
+  galleryEmpty: "Screenshots coming soon",
+  sections: {
+    overview: "Overview",
+    problem: "Problem",
+    solution: "Solution",
+    architecture: "Architecture",
+    features: "Key Features",
+    results: "Results",
+    techStack: "Tech Stack",
+    gallery: "Gallery",
+  },
+};
+
 export const experienceLabels = {
   education: "Education",
 };

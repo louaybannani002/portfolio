@@ -9,6 +9,7 @@ import { useActiveSection } from "@/hooks/useActiveSection";
 import { useSmoothScroll } from "@/components/providers/SmoothScrollProvider";
 import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
+import { SectionLink } from "./SectionLink";
 
 const SECTION_IDS = navLinks.map((l) => l.id);
 
@@ -73,8 +74,8 @@ export function Navbar() {
                 const isActive = active === link.id;
                 return (
                   <li key={link.id} className="relative">
-                    <a
-                      href={`#${link.id}`}
+                    <SectionLink
+                      section={link.id}
                       aria-current={isActive ? "location" : undefined}
                       className={`relative block rounded-pill px-3.5 py-2 text-sm transition-colors duration-200 ${
                         isActive ? "text-foreground" : "text-muted hover:text-foreground"
@@ -89,7 +90,7 @@ export function Navbar() {
                         />
                       )}
                       {link.label}
-                    </a>
+                    </SectionLink>
                   </li>
                 );
               })}

@@ -28,13 +28,16 @@ one of the `coming-soon-N` slots with it.
   year: "2026",
   context: "Internship — Company",     // or "Personal project", "Academic project", ""
   status: "published",                 // "published" | "coming-soon"
-  featured: false,                     // true = shown in the featured row on the home page
+  featured: false,                     // true = large alternating card on the home page
+  filters: ["computer-vision"],        // filter tabs it appears under (see below)
+  overview: "Short summary of the project.",
   problem: "What problem did it solve?",
   solution: "How did you solve it?",
   features: [
     "What you built, one bullet per item.",
   ],
-  pipelineSteps: ["Step 1", "Step 2"], // optional, delete the line if not relevant
+  pipelineSteps: ["Step 1", "Step 2"], // optional: animated pipeline in the Architecture section
+  // architecture: [...],              // optional: layered diagram instead of the pipeline (see below)
   metrics: [
     { value: "93%", label: "Accuracy" },
   ],
@@ -61,14 +64,40 @@ one of the `coming-soon-N` slots with it.
 | `context` | no | Where or why it was built. |
 | `status` | yes | `coming-soon` shows a teaser card with no detail page. |
 | `featured` | yes | Keep about 3 featured projects. |
-| `problem` / `solution` | no | Empty strings are hidden. |
-| `features` | yes | At least one bullet. |
-| `pipelineSteps` | no | Rendered as a step-by-step flow. |
-| `metrics` | no | `value` is shown large and `label` small. |
+| `filters` | yes | Any of `llm-agents`, `computer-vision`, `deep-learning`, `forecasting`, `nlp-recsys`. A tab is hidden when no published project uses it. |
+| `overview` / `problem` / `solution` | no | Case-study sections. Empty strings are hidden. Separate paragraphs with a blank line (`
+
+`). |
+| `features` | yes | At least one bullet. Percentages such as "93%" or "9% MAPE" are highlighted automatically. |
+| `pipelineSteps` | no | Animated step-by-step flow in the "Architecture" section. |
+| `architecture` | no | Layered diagram (takes precedence over `pipelineSteps`). See PrediBot for an example. |
+| `metrics` | no | The first one is the badge on cards. All of them appear in "Results" with a count-up animation. |
 | `techStack` | yes | Shown as tags. |
 | `githubUrl` / `demoUrl` | no | Full `https://` URLs. |
 | `coverImage` | yes | Path under `public/`, starting with `/`. |
 | `gallery` | no | Ordered list of image paths. |
+
+### Architecture diagrams (optional)
+
+Tiers are drawn top to bottom, with animated connectors between them. A tier with a single node
+is drawn as the central hub. The icons are `whatsapp`, `chat`, `bot`, `inventory`, `haccp`,
+`suppliers`, `hr`, `production`, `forecast`, `workflow`, `server`, `alert`, `database`, `api`,
+`model` and `document`.
+
+```ts
+architecture: [
+  { label: "Input", nodes: [{ title: "Invoices", icon: "document" }] },
+  { label: "Models", nodes: [{ title: "CNN", subtitle: "Field extraction", icon: "model" }, …] },
+],
+```
+
+### What appears automatically
+
+- **Home page:** a card (large if `featured`) with the cover, metric badge, tech pills and buttons.
+  The GitHub and Live demo buttons only appear when their URL is set.
+- **Detail page:** `/projects/<slug>/`, generated at build time for every `published` project.
+  Sections without data are hidden. The Gallery shows "Screenshots coming soon" until you add images.
+- **Previous / next** navigation between published projects, in the array order.
 
 ## 4. Add the images
 

@@ -20,6 +20,9 @@ components/layout/    Navbar, MobileMenu, Logo, ScrollProgress, CustomCursor
 components/ui/        Primitives: Reveal, SectionHeading, MagneticButton, CountUp, FallbackImage,
                       ProfileImage/ProfileAvatar, ProjectCover
 components/sections/  Page sections: Hero, About, Experience (+ hero/, about/, experience/ sub-parts)
+components/projects/  Project cards, filter explorer, detail page, diagrams, gallery/lightbox
+app/projects/[slug]/  Static case-study pages (generateStaticParams, dynamicParams = false)
+app/template.tsx      Page enter transition (client-side navigations only)
 lib/                  Small helpers (highlight.tsx: phrase + metric highlighting)
 hooks/                useActiveSection, usePrefersReducedMotion, useFinePointer
 data/portfolio.ts     ALL personal content (identity, experience, skills, certificates…)
@@ -72,6 +75,7 @@ Premium, dark, modern AI-engineer aesthetic (Linear / Vercel style).
   effects, also check `prefersReducedMotion()` directly, because the hook returns the SSR default on the first commit.
   With reduced motion: Lenis is off, the custom cursor is off, and Reveal/SectionHeading fall back to opacity only.
   Keep `MotionConfig reducedMotion="user"` and the global CSS guard.
+- Links to home sections go through `SectionLink` (a plain `#id` anchor on "/", or a Next link to "/#id" elsewhere).
 - In-page links are plain `<a href="#id">`. SmoothScrollProvider intercepts them (navbar offset,
   focus management). For programmatic scrolling use `useSmoothScroll().scrollTo("#id")`.
 - Custom cursor: only on `(hover: hover) and (pointer: fine)`. Add `data-cursor="hover"` to
@@ -83,6 +87,9 @@ Premium, dark, modern AI-engineer aesthetic (Linear / Vercel style).
 - No server-only features: no API routes, server actions, middleware, ISR/revalidate,
   `cookies()`/`headers()` or runtime `next/image` optimization.
 - Dynamic routes (e.g. `/projects/[slug]`) must export `generateStaticParams` from `data/projects.ts`.
+- Fixed overlays (lightbox, modals) must be portaled to `document.body`. Ancestors with `transform`
+  or `filter` (Reveal, the page transition) break `position: fixed`.
+- Adding a project must never require component changes: everything is driven by `data/projects.ts`.
 - Browser-only code (Lenis, window) goes in `"use client"` components inside `useEffect`.
 
 ## Definition of done

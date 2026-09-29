@@ -1,9 +1,10 @@
 import { identity } from "@/data/portfolio";
+import { SectionLink } from "./SectionLink";
 
 export function Logo({ onClick }: { onClick?: () => void }) {
   return (
-    <a
-      href="#top"
+    <SectionLink
+      section="top"
       onClick={onClick}
       aria-label={`${identity.name} — back to top`}
       className="group relative inline-flex h-9 w-9 items-center justify-center rounded-control"
@@ -16,6 +17,6 @@ export function Logo({ onClick }: { onClick?: () => void }) {
       <span className="text-gradient relative font-display text-sm font-bold tracking-tight">
         {identity.initials}
       </span>
-    </a>
+    </SectionLink>
   );
 }

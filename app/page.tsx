@@ -1,10 +1,11 @@
 import { About } from "@/components/sections/About";
 import { Experience } from "@/components/sections/Experience";
 import { Hero } from "@/components/sections/Hero";
+import { Projects } from "@/components/sections/Projects";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { navLinks } from "@/data/site";
 
-const BUILT = ["about", "experience"];
+const BUILT = ["about", "experience", "projects"];
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <Hero />
       <About />
       <Experience />
+      <Projects />
 
       {/* Section shells — content is built in later tasks */}
       {navLinks

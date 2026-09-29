@@ -5,6 +5,7 @@ import { motion, type Variants } from "motion/react";
 import { useEffect, useRef } from "react";
 import { CV_PATH, identity } from "@/data/portfolio";
 import { downloadCvLabel, navLinks } from "@/data/site";
+import { SectionLink } from "./SectionLink";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -64,9 +65,9 @@ export function MobileMenu({ active, onClose }: MobileMenuProps) {
         <ul className="flex flex-col">
           {navLinks.map((link, i) => (
             <motion.li key={link.id} variants={item} className="border-b border-border">
-              <a
+              <SectionLink
                 ref={i === 0 ? firstLinkRef : undefined}
-                href={`#${link.id}`}
+                section={link.id}
                 onClick={() => onClose()}
                 aria-current={active === link.id ? "location" : undefined}
                 className="group flex items-baseline gap-4 py-4"
@@ -79,7 +80,7 @@ export function MobileMenu({ active, onClose }: MobileMenuProps) {
                 >
                   {link.label}
                 </span>
-              </a>
+              </SectionLink>
             </motion.li>
           ))}
         </ul>

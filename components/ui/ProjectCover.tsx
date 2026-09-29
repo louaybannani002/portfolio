@@ -60,12 +60,14 @@ export function ProjectPlaceholder({ project }: { project: CoverProject }) {
 interface ProjectCoverProps {
   project: CoverProject;
   className?: string;
+  /** Aspect-ratio utilities (override for tall/fill layouts). */
+  aspect?: string;
 }
 
 /** Project cover image; missing/failed file → generated placeholder. */
-export function ProjectCover({ project, className = "" }: ProjectCoverProps) {
+export function ProjectCover({ project, className = "", aspect = "aspect-video" }: ProjectCoverProps) {
   return (
-    <div className={`relative aspect-video overflow-hidden bg-surface ${className}`}>
+    <div className={`relative overflow-hidden bg-surface ${aspect} ${className}`}>
       <FallbackImage
         src={project.coverImage}
         alt={project.title}
