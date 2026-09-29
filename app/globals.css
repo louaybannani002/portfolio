@@ -1,38 +1,158 @@
 @import "tailwindcss";
+@import "lenis/dist/lenis.css";
 
-/* Dark premium AI aesthetic — design tokens */
+/* ==========================================================================
+   Design tokens — dark premium AI aesthetic (Linear / Vercel style)
+   ========================================================================== */
 :root {
-  --background: #07080c;
-  --surface: #0f1117;
-  --foreground: #e8eaf0;
-  --muted: #8b90a0;
-  --accent: #7c5cff;
-  --accent-2: #22d3ee;
+  --background: #0a0a0f;
+  --surface: #111118;
+  --elevated: #17171f;
+  --foreground: #ededf2;
+  --muted: #8a8a99;
+  --subtle: #5a5a68;
+  --border: rgb(255 255 255 / 0.08);
+  --border-strong: rgb(255 255 255 / 0.14);
+  --glass: rgb(255 255 255 / 0.03);
+
+  /* One accent gradient: electric blue → violet */
+  --accent: #3b82f6;
+  --accent-2: #8b5cf6;
+  --accent-gradient: linear-gradient(120deg, var(--accent) 0%, var(--accent-2) 100%);
+
+  --nav-height: 72px;
   color-scheme: dark;
 }
 
 @theme inline {
+  /* Colors */
   --color-background: var(--background);
   --color-surface: var(--surface);
+  --color-elevated: var(--elevated);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-glass: var(--glass);
   --color-accent: var(--accent);
   --color-accent-2: var(--accent-2);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  /* Fonts (next/font variables set in app/layout.tsx) */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-inter), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  /* Radius → rounded-card, rounded-pill… */
+  --radius-card: 1.25rem;
+  --radius-control: 0.75rem;
+  --radius-pill: 9999px;
+
+  /* Spacing → py-section, px-gutter, h-nav… */
+  --spacing-section: clamp(5rem, 12vw, 9rem);
+  --spacing-gutter: clamp(1rem, 4vw, 2rem);
+  --spacing-nav: var(--nav-height);
+
+  /* Containers → max-w-content */
+  --container-content: 72rem;
 }
 
-html {
-  background: var(--background);
+/* ==========================================================================
+   Base
+   ========================================================================== */
+@layer base {
+  html {
+    background: var(--background);
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  section[id] {
+    scroll-margin-top: var(--nav-height);
+  }
+
+  ::selection {
+    background: rgb(139 92 246 / 0.35);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  /* Programmatic focus targets (sections after anchor jumps) */
+  [tabindex="-1"]:focus {
+    outline: none;
+  }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+/* Subtle film grain over everything (fixed, non-interactive) */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* Always respect reduced motion */
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
+@utility glass {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+}
+
+@utility bg-accent-gradient {
+  background-image: var(--accent-gradient);
+}
+
+@utility text-gradient {
+  background-image: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility label-mono {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Custom cursor active (fine pointer only): hide native cursor except in text fields */
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none !important;
+}
+html.has-custom-cursor :is(input, textarea, select, [contenteditable="true"]) {
+  cursor: auto !important;
+}
+
+/* ==========================================================================
+   Reduced motion — always respected
+   ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto !important;

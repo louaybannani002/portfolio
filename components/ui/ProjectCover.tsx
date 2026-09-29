@@ -20,13 +20,12 @@ const CATEGORY_ICONS: Record<string, LucideIcon> = {
   "Time Series": LineChart,
 };
 
+// Variations of the single blue → violet accent, so placeholders stay on-brand
 const GRADIENTS = [
-  "from-indigo-600/70 via-violet-700/40 to-slate-950",
-  "from-cyan-500/60 via-sky-800/40 to-slate-950",
-  "from-fuchsia-600/60 via-purple-800/40 to-slate-950",
-  "from-emerald-500/50 via-teal-800/40 to-slate-950",
-  "from-amber-500/50 via-orange-800/30 to-slate-950",
-  "from-blue-600/60 via-indigo-900/40 to-slate-950",
+  "from-accent/60 via-accent-2/30 to-background",
+  "from-accent-2/60 via-accent/25 to-background",
+  "from-accent/45 via-background to-accent-2/40",
+  "from-accent-2/45 via-background to-accent/40",
 ];
 
 function hash(str: string) {

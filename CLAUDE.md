@@ -14,11 +14,15 @@ Personal portfolio of Louay Bannani (Data Science & AI/ML Engineer). It is a sta
 ## Folder structure
 
 ```
-app/                  Routes (App Router). layout.tsx, page.tsx, globals.css
-components/ui/        Reusable UI primitives (FallbackImage, ProfileAvatar, ProjectCover…)
+app/                  Routes (App Router). layout.tsx (fonts, providers, navbar), page.tsx, globals.css (tokens)
+components/providers/ AppProviders (MotionConfig), SmoothScrollProvider (Lenis + anchor links, useSmoothScroll)
+components/layout/    Navbar, MobileMenu, Logo, ScrollProgress, CustomCursor
+components/ui/        Primitives: Reveal, SectionHeading, FallbackImage, ProfileAvatar, ProjectCover
 components/sections/  Page sections (Hero, About, Experience…), when built
+hooks/                useActiveSection, usePrefersReducedMotion
 data/portfolio.ts     ALL personal content (identity, experience, skills, certificates…)
 data/projects.ts      ALL projects (typed Project interface)
+data/site.ts          Nav links + section labels ("02 — EXPERIENCE"), UI labels
 data/PROJECT_TEMPLATE.md  How to add a project
 public/images/profile.jpg Profile photo (path constant: PROFILE_PHOTO)
 public/projects/<slug>/   cover.jpg, 1.jpg, 2.jpg… per project
@@ -46,15 +50,30 @@ LouayBannani(CV).pdf  Original CV (keep, do not rename)
 
 ## Design direction
 
-Dark premium AI aesthetic: near-black background (`--background`), subtle surfaces, violet
-(`--accent`) and cyan (`--accent-2`) accents, glassy borders (`border-white/10`), soft glows and
-gradients, Geist Sans/Mono, generous spacing and restrained motion. It must look polished on mobile
-(≥ 360px) and never scroll horizontally. Use the tokens from `globals.css`; don't scatter raw hex values.
+Premium, dark, modern AI-engineer aesthetic (Linear / Vercel style).
+- Background `#0a0a0f`, subtle fixed grain overlay (body::after), glass cards (`glass` utility:
+  translucent fill, thin `border-border`, backdrop blur).
+- **One accent gradient only**: electric blue `--accent` (#3b82f6) → violet `--accent-2` (#8b5cf6).
+  Use the `bg-accent-gradient` / `text-gradient` utilities; don't introduce other accent hues.
+- Fonts (next/font): Space Grotesk `font-display` for headings, Inter `font-sans` for body,
+  JetBrains Mono `font-mono` / `label-mono` for small technical labels.
+- Tokens live in `app/globals.css` (`:root` + `@theme`): colors (`bg-surface`, `text-muted`,
+  `border-border`…), radius (`rounded-card`, `rounded-control`, `rounded-pill`), spacing
+  (`py-section`, `px-gutter`, `h-nav`), container (`max-w-content`). Never hard-code hex values in components.
+- Sections: `<section id="…" aria-labelledby="…-heading" className="mx-auto max-w-content px-gutter py-section">`
+  starting with `<SectionHeading section="…" />`. Wrap content in `<Reveal>` (use `stagger` for lists).
+- Must look polished on mobile (≥ 360px) and never scroll horizontally.
 
 ## Motion and accessibility
 
-- **Always respect `prefers-reduced-motion`**: use `useReducedMotion()` from motion, disable Lenis
-  when reduced motion is on, and keep the global CSS reduced-motion guard.
+- **Always respect `prefers-reduced-motion`**: use `usePrefersReducedMotion()` (hooks/). Inside
+  effects, also check `prefersReducedMotion()` directly, because the hook returns the SSR default on the first commit.
+  With reduced motion: Lenis is off, the custom cursor is off, and Reveal/SectionHeading fall back to opacity only.
+  Keep `MotionConfig reducedMotion="user"` and the global CSS guard.
+- In-page links are plain `<a href="#id">`. SmoothScrollProvider intercepts them (navbar offset,
+  focus management). For programmatic scrolling use `useSmoothScroll().scrollTo("#id")`.
+- Custom cursor: only on `(hover: hover) and (pointer: fine)`. Add `data-cursor="hover"` to
+  make non-link elements grow the ring.
 - Semantic HTML, visible focus states, alt text and sufficient contrast.
 
 ## Static export compatibility
