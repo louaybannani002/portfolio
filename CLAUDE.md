@@ -19,7 +19,8 @@ components/providers/ AppProviders (MotionConfig), SmoothScrollProvider (Lenis +
 components/layout/    Navbar, MobileMenu, Logo, ScrollProgress, CustomCursor
 components/ui/        Primitives: Reveal, SectionHeading, MagneticButton, CountUp, FallbackImage,
                       ProfileImage/ProfileAvatar, ProjectCover
-components/sections/  Page sections: Hero.tsx, About.tsx (+ hero/, about/ sub-parts); more to come
+components/sections/  Page sections: Hero, About, Experience (+ hero/, about/, experience/ sub-parts)
+lib/                  Small helpers (highlight.tsx: phrase + metric highlighting)
 hooks/                useActiveSection, usePrefersReducedMotion, useFinePointer
 data/portfolio.ts     ALL personal content (identity, experience, skills, certificates…)
 data/projects.ts      ALL projects (typed Project interface)

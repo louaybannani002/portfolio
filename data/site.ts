@@ -22,6 +22,10 @@ export const getNavLink = (id: SectionId) => navLinks.find((l) => l.id === id)!;
 
 export const downloadCvLabel = "Download CV";
 
+export const experienceLabels = {
+  education: "Education",
+};
+
 export const heroLabels = {
   viewWork: "View my work",
   scroll: "Scroll",

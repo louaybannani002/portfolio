@@ -3,23 +3,8 @@ import { CountUp } from "@/components/ui/CountUp";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { education, identity, languages, stats, summary, summaryHighlights } from "@/data/portfolio";
+import { highlightPhrases } from "@/lib/highlight";
 import { PhotoFrame } from "./about/PhotoFrame";
-
-/** Wraps the listed phrases in emphasis spans; the text itself is unchanged. */
-function highlight(text: string, phrases: string[]) {
-  if (!phrases.length) return text;
-  const escaped = phrases.map((p) => p.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
-  const parts = text.split(new RegExp(`(${escaped.join("|")})`, "g"));
-  return parts.map((part, i) =>
-    phrases.includes(part) ? (
-      <span key={i} className="font-medium text-foreground">
-        {part}
-      </span>
-    ) : (
-      part
-    ),
-  );
-}
 
 interface Chip {
   icon: LucideIcon;
@@ -50,7 +35,7 @@ export function About() {
         <div className="min-w-0">
           <Reveal>
             <p className="text-lg leading-relaxed text-pretty text-muted sm:text-xl sm:leading-relaxed">
-              {highlight(summary, summaryHighlights)}
+              {highlightPhrases(summary, summaryHighlights)}
             </p>
           </Reveal>
 

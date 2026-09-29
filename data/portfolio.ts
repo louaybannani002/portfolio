@@ -46,6 +46,14 @@ export interface Experience {
   tags: string[];
   /** Slug in data/projects.ts this experience relates to, if any */
   relatedProject?: string;
+  /**
+   * Connector shown on the timeline between this experience and the one right after it
+   * (the earlier one, since the list is newest first).
+   */
+  progression?: {
+    label: string;
+    detail: string;
+  };
 }
 
 export interface Availability {
@@ -189,6 +197,10 @@ export const experiences: Experience[] = [
       "Twilio WhatsApp",
     ],
     relatedProject: "predibot",
+    progression: {
+      label: "Returned to scale it to production",
+      detail: "2025 prototype → 2026 production system",
+    },
   },
   {
     id: "prendstapart-2025",

@@ -1,17 +1,21 @@
 import { About } from "@/components/sections/About";
+import { Experience } from "@/components/sections/Experience";
 import { Hero } from "@/components/sections/Hero";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { navLinks } from "@/data/site";
+
+const BUILT = ["about", "experience"];
 
 export default function Home() {
   return (
     <>
       <Hero />
       <About />
+      <Experience />
 
       {/* Section shells — content is built in later tasks */}
       {navLinks
-        .filter((link) => link.id !== "about")
+        .filter((link) => !BUILT.includes(link.id))
         .map((link) => (
           <section
             key={link.id}

@@ -49,6 +49,8 @@ AI & Data Science engineer who builds end-to-end intelligent systems, from data 
 - Developed a **Python/Flask forecasting microservice** with Prophet for recipe-level production forecasting, covering data preprocessing, per-recipe models, fallback strategies, and API integration (forecast error: **9%** MAPE).
 - Deployed conversational access through **OpenAI Agent Builder, ChatKit, and Twilio WhatsApp**, with proactive operational alerts for kitchen and stock teams.
 
+> **Timeline connector (between #1 and #2):** Returned to scale it to production — 2025 prototype → 2026 production system
+
 ### 2. Data Science & AI Engineer Intern — PrendsTaPart
 - **Location:** Tunis, Tunisia
 - **Dates:** July 2025 – August 2025 (2 months)
