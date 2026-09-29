@@ -19,6 +19,7 @@
   --accent: #3b82f6;
   --accent-2: #8b5cf6;
   --accent-gradient: linear-gradient(120deg, var(--accent) 0%, var(--accent-2) 100%);
+  --success: #22c55e;
 
   --nav-height: 72px;
   color-scheme: dark;
@@ -37,6 +38,7 @@
   --color-glass: var(--glass);
   --color-accent: var(--accent);
   --color-accent-2: var(--accent-2);
+  --color-success: var(--success);
 
   /* Fonts (next/font variables set in app/layout.tsx) */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
@@ -139,6 +141,35 @@ body::after {
   font-size: 0.75rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+}
+
+/* Animated gradient border (e.g. About photo frame): a comet of accent light running around
+   a faint base border. Apply to a wrapper with padding = border width. */
+@property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes border-spin {
+  to {
+    --border-angle: 360deg;
+  }
+}
+
+@utility gradient-border {
+  background:
+    conic-gradient(
+      from var(--border-angle),
+      var(--accent),
+      var(--accent-2) 20%,
+      transparent 40%,
+      transparent 60%,
+      var(--accent-2) 80%,
+      var(--accent)
+    ),
+    linear-gradient(var(--border-strong), var(--border-strong));
+  animation: border-spin 6s linear infinite;
 }
 
 /* Custom cursor active (fine pointer only): hide native cursor except in text fields */

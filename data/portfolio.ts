@@ -48,9 +48,16 @@ export interface Experience {
   relatedProject?: string;
 }
 
+export interface Availability {
+  available: boolean;
+  label: string;
+}
+
 export interface Education {
   school: string;
   shortName: string;
+  /** Short chip label, e.g. "AI & Data Science Engineering" */
+  shortDegree: string;
   location: string;
   degree: string;
   period: string;
@@ -90,6 +97,8 @@ export interface ContactContent {
 
 /** Single place to change the profile photo. Missing file → "LB" initials fallback. */
 export const PROFILE_PHOTO = "/images/profile.jpg";
+/** CSS object-position keeping the face centered when the photo is cropped. */
+export const PROFILE_PHOTO_POSITION = "50% 22%";
 
 /** Downloadable CV (copied from LouayBannani(CV).pdf). */
 export const CV_PATH = "/Louay_Bannani_CV.pdf";
@@ -118,19 +127,36 @@ export const identity: Identity = {
 /** Rotating hero roles. Only the CV title is known — add more in CONTENT.md first. */
 export const heroRoles: string[] = ["Data Science & AI/ML Engineer"];
 
+/** Hero badge. Set available: false to hide it. */
+export const availability: Availability = {
+  available: true,
+  label: "Available for opportunities",
+};
+
 /** TODO (CONTENT.md → Missing): one-line hero tagline. */
 export const tagline = "";
 
 export const summary =
   "AI & Data Science engineer who builds end-to-end intelligent systems, from data pipelines and forecasting models to LLM-powered multi-agent assistants deployed on real business channels. Delivered PrediBot, a multi-agent restaurant-operations platform (six MCP sub-agents, 21 n8n workflows, Prophet forecasting service, WhatsApp integration), and a CNN-based invoice OCR pipeline with financial anomaly detection. Strong in Python, deep learning, RAG, time series and REST API integration, with full-stack experience in Laravel, MySQL and Vue.js.";
 
-/** Numbers taken verbatim from the CV. */
+/**
+ * About-section stats (numbers verbatim from the CV; selection chosen by Louay).
+ * The 91% speech-emotion accuracy lives in data/projects.ts.
+ */
 export const stats: Stat[] = [
-  { value: "6", label: "MCP-based sub-agents" },
+  { value: "6", label: "MCP sub-agents" },
   { value: "21", label: "n8n workflows" },
   { value: "93%", label: "OCR field-level accuracy" },
-  { value: "91%", label: "Speech emotion recognition accuracy" },
   { value: "9%", label: "Forecast error (MAPE)" },
+];
+
+/** Phrases from the summary rendered with emphasis (styling only — text unchanged). */
+export const summaryHighlights: string[] = [
+  "end-to-end intelligent systems",
+  "PrediBot",
+  "six MCP sub-agents",
+  "21 n8n workflows",
+  "CNN-based invoice OCR pipeline",
 ];
 
 export const experiences: Experience[] = [
@@ -221,6 +247,7 @@ export const education: Education[] = [
   {
     school: "École Pluridisciplinaire Internationale (EPI)",
     shortName: "EPI",
+    shortDegree: "AI & Data Science Engineering",
     location: "Sousse, Tunisia",
     degree: "Engineering Degree in Artificial Intelligence and Data Science",
     period: "September 2021 – August 2026",

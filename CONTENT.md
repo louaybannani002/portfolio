@@ -16,9 +16,26 @@
 - **LinkedIn:** linkedin.com/in/LouayBannani
 - **GitHub:** github.com/louaybannani002
 
+## Availability badge (hero)
+
+Available for opportunities
+
 ## Summary
 
 AI & Data Science engineer who builds end-to-end intelligent systems, from data pipelines and forecasting models to LLM-powered multi-agent assistants deployed on real business channels. Delivered PrediBot, a multi-agent restaurant-operations platform (six MCP sub-agents, 21 n8n workflows, Prophet forecasting service, WhatsApp integration), and a CNN-based invoice OCR pipeline with financial anomaly detection. Strong in Python, deep learning, RAG, time series and REST API integration, with full-stack experience in Laravel, MySQL and Vue.js.
+
+## About stats
+
+- 6 — MCP sub-agents
+- 21 — n8n workflows
+- 93% — OCR field-level accuracy
+- 9% — Forecast error (MAPE)
+
+## About info chips
+
+- Tunisia
+- AI & Data Science Engineering (EPI)
+- Arabic (Native) · English (Professional) · French (Intermediate)
 
 ---
 
@@ -136,6 +153,5 @@ The CV does not contain these. They are left empty (`""` / `[]`) in `data/` unti
 - [ ] **Contact section text** (heading + short invitation paragraph)
 - [ ] **Footer text**
 - [ ] **Per-project:** tagline, problem, solution, pipeline steps, GitHub URL, demo URL, images
-- [ ] **Stats labels:** stats currently reuse CV numbers only (6 MCP sub-agents, 21 n8n workflows, 93%, 91%, 9% MAPE)
 - [ ] **Certificates:** issuer confirmation for "Data Science Bootcamp", and credential URLs for all
 - [ ] **Coming-soon slots:** titles/descriptions (optional)

@@ -17,9 +17,10 @@ Personal portfolio of Louay Bannani (Data Science & AI/ML Engineer). It is a sta
 app/                  Routes (App Router). layout.tsx (fonts, providers, navbar), page.tsx, globals.css (tokens)
 components/providers/ AppProviders (MotionConfig), SmoothScrollProvider (Lenis + anchor links, useSmoothScroll)
 components/layout/    Navbar, MobileMenu, Logo, ScrollProgress, CustomCursor
-components/ui/        Primitives: Reveal, SectionHeading, FallbackImage, ProfileAvatar, ProjectCover
-components/sections/  Page sections (Hero, About, Experience…), when built
-hooks/                useActiveSection, usePrefersReducedMotion
+components/ui/        Primitives: Reveal, SectionHeading, MagneticButton, CountUp, FallbackImage,
+                      ProfileImage/ProfileAvatar, ProjectCover
+components/sections/  Page sections: Hero.tsx, About.tsx (+ hero/, about/ sub-parts); more to come
+hooks/                useActiveSection, usePrefersReducedMotion, useFinePointer
 data/portfolio.ts     ALL personal content (identity, experience, skills, certificates…)
 data/projects.ts      ALL projects (typed Project interface)
 data/site.ts          Nav links + section labels ("02 — EXPERIENCE"), UI labels

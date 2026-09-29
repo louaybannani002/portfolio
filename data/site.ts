@@ -21,3 +21,14 @@ export const navLinks: NavLink[] = [
 export const getNavLink = (id: SectionId) => navLinks.find((l) => l.id === id)!;
 
 export const downloadCvLabel = "Download CV";
+
+export const heroLabels = {
+  viewWork: "View my work",
+  scroll: "Scroll",
+};
+
+export const socialLabels = {
+  github: "GitHub",
+  linkedin: "LinkedIn",
+  email: "Email",
+};
