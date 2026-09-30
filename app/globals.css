@@ -187,6 +187,18 @@ body::after {
   animation: shimmer 2.8s ease-in-out infinite;
 }
 
+/* Infinite logo marquee: content is duplicated once, so -50% loops seamlessly */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@utility marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--marquee-duration, 40s) linear infinite;
+}
+
 /* Data "packets" travelling along diagram connectors */
 @keyframes flow-x {
   0% { left: 0%; opacity: 0; }

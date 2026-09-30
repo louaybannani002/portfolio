@@ -156,6 +156,8 @@ Communication & Presentation, Team Leadership, Project Management, Problem-Solvi
 - English (Professional)
 - French (Intermediate)
 
+(Proficiency bars on the site: Native 5/5, Professional 4/5, Intermediate 3/5.)
+
 ## Associative Life
 
 - Active Member – EPI Junior Entreprise, Project Division (2024–2025)

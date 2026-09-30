@@ -86,6 +86,8 @@ export interface Certificate {
 export interface Language {
   language: string;
   level: string;
+  /** Bar fill on a 1–5 scale (visual only; the level text is what's displayed). */
+  proficiency: 1 | 2 | 3 | 4 | 5;
 }
 
 export interface AssociativeRole {
@@ -331,9 +333,9 @@ export const certificates: Certificate[] = [
 ];
 
 export const languages: Language[] = [
-  { language: "Arabic", level: "Native" },
-  { language: "English", level: "Professional" },
-  { language: "French", level: "Intermediate" },
+  { language: "Arabic", level: "Native", proficiency: 5 },
+  { language: "English", level: "Professional", proficiency: 4 },
+  { language: "French", level: "Intermediate", proficiency: 3 },
 ];
 
 export const softSkills: string[] = [

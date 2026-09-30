@@ -21,6 +21,8 @@ interface RevealProps {
   stagger?: boolean | number;
   /** className for each wrapped child when staggering. */
   itemClassName?: string;
+  /** Per-child classNames (by index), appended to itemClassName — e.g. grid column spans. */
+  itemClassNames?: string[];
   /** Slide distance in px. */
   y?: number;
   /** Fraction of the element that must be visible to trigger. */
@@ -59,6 +61,7 @@ export function Reveal({
   delay = 0,
   stagger,
   itemClassName,
+  itemClassNames,
   y = 24,
   amount = 0.2,
 }: RevealProps) {
@@ -90,7 +93,11 @@ export function Reveal({
   return (
     <Tag className={className} variants={container} initial="hidden" whileInView="visible" viewport={viewport}>
       {Children.toArray(children).map((child, i) => (
-        <Item key={i} className={itemClassName} variants={itemVariants(reduce, y)}>
+        <Item
+          key={i}
+          className={[itemClassName, itemClassNames?.[i]].filter(Boolean).join(" ") || undefined}
+          variants={itemVariants(reduce, y)}
+        >
           {child}
         </Item>
       ))}

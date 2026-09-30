@@ -19,11 +19,13 @@ components/providers/ AppProviders (MotionConfig), SmoothScrollProvider (Lenis +
 components/layout/    Navbar, MobileMenu, Logo, ScrollProgress, CustomCursor
 components/ui/        Primitives: Reveal, SectionHeading, MagneticButton, CountUp, FallbackImage,
                       ProfileImage/ProfileAvatar, ProjectCover
-components/sections/  Page sections: Hero, About, Experience (+ hero/, about/, experience/ sub-parts)
+components/sections/  Page sections: Hero, About, Experience, Projects, Skills, Certificates (+ Extras)
+                      with sub-parts in hero/, about/, experience/, skills/, certificates/
 components/projects/  Project cards, filter explorer, detail page, diagrams, gallery/lightbox
 app/projects/[slug]/  Static case-study pages (generateStaticParams, dynamicParams = false)
 app/template.tsx      Page enter transition (client-side navigations only)
-lib/                  Small helpers (highlight.tsx: phrase + metric highlighting)
+lib/                  Small helpers: highlight.tsx (phrase + metric highlighting),
+                      techIcons.ts (tech/issuer name → brand icon; unmapped names render as mono pills)
 hooks/                useActiveSection, usePrefersReducedMotion, useFinePointer
 data/portfolio.ts     ALL personal content (identity, experience, skills, certificates…)
 data/projects.ts      ALL projects (typed Project interface)

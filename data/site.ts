@@ -46,6 +46,21 @@ export const projectLabels = {
   },
 };
 
+export const skillsLabels = {
+  marqueeAriaLabel: "Technologies",
+};
+
+export const certificateLabels = {
+  viewCredential: "View credential",
+  total: "Certificates",
+};
+
+export const extrasLabels = {
+  languages: "Languages",
+  softSkills: "Soft skills",
+  associativeLife: "Associative life",
+};
+
 export const experienceLabels = {
   education: "Education",
 };
