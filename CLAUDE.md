@@ -30,16 +30,18 @@ lib/                  Small helpers: highlight.tsx (phrase + metric highlighting
                       techIcons.ts (tech/issuer name → brand icon; unmapped names render as mono pills)
 hooks/                useActiveSection, usePrefersReducedMotion, useFinePointer, useFocusTrap
 scripts/              gen-assets.mjs (prebuild/predev: indexes public/ images → lib/assets.generated.ts),
-                      fix-next-font-windows.mjs (postinstall: Windows-only Next.js font-preload fix)
+                      fix-next-font-windows.mjs (postinstall: Windows-only Next.js font-preload fix),
+                      optimize-photo.mjs (`npm run photo`: profile.jpg → profile.webp)
 app/sitemap.ts, robots.ts, manifest.ts, not-found.tsx, icon.png, apple-icon.png, favicon.ico
 data/seo.ts           Site URL, title/description/keywords, OG image, JSON-LD Person
 data/portfolio.ts     ALL personal content (identity, experience, skills, certificates…)
 data/projects.ts      ALL projects (typed Project interface)
 data/site.ts          Nav links + section labels ("02 — EXPERIENCE"), UI labels
 data/PROJECT_TEMPLATE.md  How to add a project
-public/images/profile.jpg Profile photo (path constant: PROFILE_PHOTO)
+public/images/profile.jpg Profile photo source → `npm run photo` → profile.webp (PROFILE_PHOTO)
 public/projects/<slug>/   cover.jpg, 1.jpg, 2.jpg… per project
 public/Louay_Bannani_CV.pdf  Downloadable CV (CV_PATH)
+netlify.toml          Build (npm run build → out/, Node 20), caching + security headers
 CONTENT.md            Source of truth for all text
 LouayBannani(CV).pdf  Original CV (keep, do not rename)
 ```

@@ -10,7 +10,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "postinstall": "node scripts/fix-next-font-windows.mjs"
+    "postinstall": "node scripts/fix-next-font-windows.mjs",
+    "photo": "node scripts/optimize-photo.mjs"
   },
   "dependencies": {
     "lenis": "^1.3.26",

@@ -1,0 +1,62 @@
+# Netlify configuration — static export (next.config.ts: output: "export" → out/)
+
+[build]
+  command = "npm run build"
+  publish = "out"
+
+[build.environment]
+  NODE_VERSION = "20"
+  # Keep telemetry out of CI logs
+  NEXT_TELEMETRY_DISABLED = "1"
+
+# ---------------------------------------------------------------------------
+# Security headers (every response)
+# ---------------------------------------------------------------------------
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    Cross-Origin-Opener-Policy = "same-origin"
+
+# ---------------------------------------------------------------------------
+# Caching
+# ---------------------------------------------------------------------------
+# Next.js build assets are content-hashed: cache forever.
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Stable file names (can be replaced without renaming): cache a week, then revalidate.
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/projects/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/favicon.ico"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+
+# The CV may be updated in place: short cache so a new version shows up quickly.
+[[headers]]
+  for = "/Louay_Bannani_CV.pdf"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+
+# HTML pages, sitemap, robots and manifest keep Netlify's default (always revalidated),
+# so every deploy is visible immediately.
