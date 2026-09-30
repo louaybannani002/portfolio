@@ -46,6 +46,48 @@ export const projectLabels = {
   },
 };
 
+export const contactLabels = {
+  channels: {
+    email: "Email",
+    phone: "Phone",
+    linkedin: "LinkedIn",
+    github: "GitHub",
+  },
+  copyEmail: "Copy email address",
+  copied: "Copied!",
+  copyFailed: "Couldn't copy — please select the address manually",
+  form: {
+    name: "Name",
+    email: "Email",
+    subject: "Subject",
+    subjectOptional: "optional",
+    message: "Message",
+    submit: "Send message",
+    sending: "Sending…",
+    successTitle: "Message sent",
+    successText: "Thank you for reaching out.",
+    sendAnother: "Send another message",
+    errorTitle: "Something went wrong",
+    errorText: "Your message wasn't sent. Please try again, or email me directly:",
+    notConfigured: "The contact form isn't set up yet. Please email me directly:",
+    retry: "Try again",
+    defaultSubject: "New message from the portfolio",
+    fromName: "Portfolio contact form",
+  },
+  validation: {
+    nameRequired: "Please enter your name.",
+    emailRequired: "Please enter your email.",
+    emailInvalid: "Please enter a valid email address.",
+    messageRequired: "Please write a message.",
+    messageTooShort: "Please write at least 10 characters.",
+  },
+};
+
+export const footerLabels = {
+  backToTop: "Back to top",
+  navAriaLabel: "Footer",
+};
+
 export const skillsLabels = {
   marqueeAriaLabel: "Technologies",
 };

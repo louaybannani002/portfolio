@@ -11,6 +11,8 @@ interface SectionHeadingProps {
   title?: string;
   description?: string;
   align?: "left" | "center";
+  /** Title in the animated accent gradient (e.g. the Contact call-to-action). */
+  gradient?: boolean;
   className?: string;
 }
 
@@ -23,6 +25,7 @@ export function SectionHeading({
   title,
   description,
   align = "left",
+  gradient = false,
   className = "",
 }: SectionHeadingProps) {
   const reduce = usePrefersReducedMotion();
@@ -80,7 +83,7 @@ export function SectionHeading({
             aria-hidden
             className="inline-block overflow-hidden pb-[0.08em] align-bottom"
           >
-            <motion.span variants={word} className="inline-block">
+            <motion.span variants={word} className={`inline-block ${gradient ? "text-gradient-animated" : ""}`}>
               {w}
               {i < words.length - 1 && " "}
             </motion.span>

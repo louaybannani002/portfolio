@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { CustomCursor } from "@/components/layout/CustomCursor";
+import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { ScrollProgress } from "@/components/layout/ScrollProgress";
 import { identity, summary } from "@/data/portfolio";
@@ -53,6 +54,7 @@ export default function RootLayout({
           <ScrollProgress />
           <Navbar />
           <main id="main">{children}</main>
+          <Footer />
           <CustomCursor />
         </AppProviders>
       </body>

@@ -16,11 +16,11 @@ Personal portfolio of Louay Bannani (Data Science & AI/ML Engineer). It is a sta
 ```
 app/                  Routes (App Router). layout.tsx (fonts, providers, navbar), page.tsx, globals.css (tokens)
 components/providers/ AppProviders (MotionConfig), SmoothScrollProvider (Lenis + anchor links, useSmoothScroll)
-components/layout/    Navbar, MobileMenu, Logo, ScrollProgress, CustomCursor
+components/layout/    Navbar, MobileMenu, Logo, SectionLink, Footer, BackToTop, ScrollProgress, CustomCursor
 components/ui/        Primitives: Reveal, SectionHeading, MagneticButton, CountUp, FallbackImage,
                       ProfileImage/ProfileAvatar, ProjectCover
-components/sections/  Page sections: Hero, About, Experience, Projects, Skills, Certificates (+ Extras)
-                      with sub-parts in hero/, about/, experience/, skills/, certificates/
+components/sections/  Page sections: Hero, About, Experience, Projects, Skills, Certificates (+ Extras), Contact
+                      with sub-parts in hero/, about/, experience/, skills/, certificates/, contact/
 components/projects/  Project cards, filter explorer, detail page, diagrams, gallery/lightbox
 app/projects/[slug]/  Static case-study pages (generateStaticParams, dynamicParams = false)
 app/template.tsx      Page enter transition (client-side navigations only)
@@ -93,6 +93,14 @@ Premium, dark, modern AI-engineer aesthetic (Linear / Vercel style).
   or `filter` (Reveal, the page transition) break `position: fixed`.
 - Adding a project must never require component changes: everything is driven by `data/projects.ts`.
 - Browser-only code (Lenis, window) goes in `"use client"` components inside `useEffect`.
+
+## Contact form
+
+- Web3Forms, posted client-side to `https://api.web3forms.com/submit` (static export: no server).
+- Key: `NEXT_PUBLIC_WEB3FORMS_KEY` in `.env.local` (gitignored; template in `.env.example`) and in
+  the Netlify environment variables. It is inlined at build time, so rebuild after changing it.
+  Without a key the form shows a "not set up" message with a mailto fallback and sends nothing.
+- Never send real test submissions. Mock `api.web3forms.com` when testing.
 
 ## Definition of done
 
