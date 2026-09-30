@@ -62,16 +62,19 @@ interface ProjectCoverProps {
   className?: string;
   /** Aspect-ratio utilities (override for tall/fill layouts). */
   aspect?: string;
+  /** Above the fold (detail page hero): load eagerly. */
+  priority?: boolean;
 }
 
 /** Project cover image; missing/failed file → generated placeholder. */
-export function ProjectCover({ project, className = "", aspect = "aspect-video" }: ProjectCoverProps) {
+export function ProjectCover({ project, className = "", aspect = "aspect-video", priority }: ProjectCoverProps) {
   return (
     <div className={`relative overflow-hidden bg-surface ${aspect} ${className}`}>
       <FallbackImage
         src={project.coverImage}
         alt={project.title}
         className="h-full w-full object-cover"
+        priority={priority}
         fallback={<ProjectPlaceholder project={project} />}
       />
     </div>

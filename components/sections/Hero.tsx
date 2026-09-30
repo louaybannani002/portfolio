@@ -1,12 +1,9 @@
 "use client";
 
 import { ArrowRight, Download, Mail } from "lucide-react";
-import { motion } from "motion/react";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa6";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { MagneticButton } from "@/components/ui/MagneticButton";
-import { EASE_OUT } from "@/components/ui/Reveal";
-import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { CV_PATH, availability, heroRoles, identity, tagline } from "@/data/portfolio";
 import { downloadCvLabel, heroLabels, socialLabels } from "@/data/site";
 import { AnimatedName } from "./hero/AnimatedName";
@@ -20,18 +17,16 @@ const socials = [
   { label: socialLabels.email, href: `mailto:${identity.email}`, icon: Mail, external: false },
 ];
 
-/** Fades a hero element in after the name reveal. */
-function Enter({ delay, children, className }: { delay: number; children: ReactNode; className?: string }) {
-  const reduce = usePrefersReducedMotion();
+/**
+ * Fades a hero element in. Pure CSS (`.hero-enter` in globals.css), so it starts at first paint
+ * instead of waiting for JS hydration — this keeps LCP fast. The intro loader and
+ * reduced motion are handled in CSS too.
+ */
+function Enter({ delay, children, className = "" }: { delay: number; children: ReactNode; className?: string }) {
   return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y: reduce ? 0 : 16, filter: reduce ? "blur(0px)" : "blur(6px)" }}
-      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-      transition={{ duration: 0.8, ease: EASE_OUT, delay: reduce ? 0 : delay }}
-    >
+    <div className={`hero-enter ${className}`} style={{ "--d": `${delay}s` } as CSSProperties}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
@@ -59,21 +54,21 @@ export function Hero() {
 
         <AnimatedName
           name={identity.name}
-          delay={0.15}
+          delay={0.1}
           className="mt-8 font-display text-[clamp(3rem,11vw,8rem)] leading-[0.95] font-semibold tracking-[-0.04em] text-foreground"
         />
 
-        <Enter delay={0.75} className="mt-6">
+        <Enter delay={0.3} className="mt-6">
           <RotatingRole roles={heroRoles} className="font-mono text-sm tracking-wide sm:text-lg" />
         </Enter>
 
         {tagline && (
-          <Enter delay={0.85} className="mt-6">
+          <Enter delay={0.35} className="mt-6">
             <p className="max-w-2xl text-base text-pretty text-muted sm:text-lg">{tagline}</p>
           </Enter>
         )}
 
-        <Enter delay={0.95} className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
+        <Enter delay={0.4} className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
           <MagneticButton href="#projects" variant="primary">
             {heroLabels.viewWork}
             <ArrowRight aria-hidden className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -84,7 +79,7 @@ export function Hero() {
           </MagneticButton>
         </Enter>
 
-        <Enter delay={1.1} className="mt-10">
+        <Enter delay={0.5} className="mt-10">
           <ul className="flex items-center gap-3">
             {socials.map(({ label, href, icon: Icon, external }) => (
               <li key={label}>
@@ -104,7 +99,7 @@ export function Hero() {
       </div>
 
       <Enter
-        delay={1.4}
+        delay={0.8}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 [@media(max-height:640px)]:hidden"
       >
         <ScrollIndicator href="#about" label={heroLabels.scroll} />

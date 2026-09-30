@@ -10,7 +10,7 @@
   --elevated: #17171f;
   --foreground: #ededf2;
   --muted: #8a8a99;
-  --subtle: #5a5a68;
+  --subtle: #7c7c8a; /* ≥4.5:1 on --background (WCAG AA) */
   --border: rgb(255 255 255 / 0.08);
   --border-strong: rgb(255 255 255 / 0.14);
   --glass: rgb(255 255 255 / 0.03);
@@ -67,6 +67,8 @@
 @layer base {
   html {
     background: var(--background);
+    /* Safety net: decorative glows must never widen the mobile layout viewport */
+    overflow-x: clip;
   }
 
   body {
@@ -260,6 +262,105 @@ body::after {
   animation: node-glow 6s ease-in-out infinite;
 }
 
+/* Hero entrance — CSS so it runs from first paint (no hydration wait → fast LCP).
+   While the intro loader plays, everything is pushed back by its duration.
+   Fades start at opacity 0.01, not 0: invisible to the eye, but Chrome treats opacity-0
+   elements as "not painted", which would push Largest Contentful Paint to the end of the fade. */
+@keyframes hero-in {
+  from {
+    opacity: 0.01;
+    transform: translateY(16px);
+    filter: blur(6px);
+  }
+}
+
+@keyframes letter-in {
+  from {
+    opacity: 0.01;
+    transform: translateY(70%);
+    filter: blur(10px);
+  }
+}
+
+.hero-enter {
+  animation: hero-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--d, 0s);
+}
+
+.hero-letter {
+  display: inline-block;
+  animation: letter-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--d, 0s);
+}
+
+html[data-intro-delay] :is(.hero-enter, .hero-letter) {
+  animation-delay: calc(var(--d, 0s) + 0.85s);
+}
+
+/* Intro loader (first visit per session): total 1.2s, fully CSS-driven */
+.intro-loader {
+  display: none;
+}
+
+html[data-intro] {
+  overflow: hidden;
+}
+
+html[data-intro] .intro-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--background);
+  animation: intro-out 0.35s cubic-bezier(0.22, 1, 0.36, 1) 0.85s forwards;
+}
+
+html[data-intro] .intro-logo {
+  display: inline-block;
+  animation: intro-logo 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html[data-intro] .intro-bar > span {
+  transform-origin: left;
+  animation: intro-bar 0.75s ease-in-out 0.1s both;
+}
+
+@keyframes intro-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-3%);
+  }
+}
+
+/* Transform only: the wordmark must be fully painted from the first frame (it is the LCP) */
+@keyframes intro-logo {
+  from {
+    transform: scale(0.92);
+  }
+}
+
+@keyframes intro-bar {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+/* Below-the-fold sections: skip layout/paint until they approach the viewport (big win for
+   first paint on phones). `auto` remembers each section's real size once rendered.
+   SmoothScrollProvider adds html.cv-visible before any programmatic scroll, so anchor
+   targets are measured against real — not placeholder — heights. */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-block-size: auto 1000px;
+}
+
+html.cv-visible .cv-auto {
+  content-visibility: visible;
+}
+
 /* Custom cursor active (fine pointer only): hide native cursor except in text fields */
 html.has-custom-cursor,
 html.has-custom-cursor * {
@@ -267,6 +368,23 @@ html.has-custom-cursor * {
 }
 html.has-custom-cursor :is(input, textarea, select, [contenteditable="true"]) {
   cursor: auto !important;
+}
+
+/* ==========================================================================
+   Phones / touch devices: drop the most expensive effects
+   ========================================================================== */
+@media (max-width: 767px), (pointer: coarse) {
+  /* Dozens of backdrop-filter layers make scrolling janky on mobile GPUs */
+  .glass {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: rgb(255 255 255 / 0.035);
+  }
+  /* Continuous repaint animations (@property conic border, box-shadow glow) */
+  .gradient-border,
+  .node-glow {
+    animation: none;
+  }
 }
 
 /* ==========================================================================

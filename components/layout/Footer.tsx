@@ -18,7 +18,7 @@ const YEAR = new Date().getFullYear();
 /** Site footer (all routes). Tagline falls back to the CV title while footerText is empty. */
 export function Footer() {
   return (
-    <footer className="relative border-t border-border">
+    <footer className="cv-auto relative border-t border-border">
       <div
         aria-hidden
         className="bg-accent-gradient absolute inset-x-0 top-0 mx-auto h-px max-w-3xl opacity-40"

@@ -106,7 +106,7 @@ export interface ContactContent {
 // ---------------------------------------------------------------------------
 
 /** Single place to change the profile photo. Missing file → "LB" initials fallback. */
-export const PROFILE_PHOTO = "/images/profile.jpg";
+export const PROFILE_PHOTO = "/images/profile.webp"; // 720px WebP (≈19 KB) made from profile.jpg
 /** CSS object-position keeping the face centered when the photo is cropped. */
 export const PROFILE_PHOTO_POSITION = "50% 22%";
 

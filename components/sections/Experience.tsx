@@ -10,7 +10,7 @@ export function Experience() {
     <section
       id="experience"
       aria-labelledby="experience-heading"
-      className="mx-auto max-w-content px-gutter py-section"
+      className="mx-auto max-w-content px-gutter py-section cv-auto"
     >
       <SectionHeading section="experience" />
 

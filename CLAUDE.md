@@ -16,9 +16,11 @@ Personal portfolio of Louay Bannani (Data Science & AI/ML Engineer). It is a sta
 ```
 app/                  Routes (App Router). layout.tsx (fonts, providers, navbar), page.tsx, globals.css (tokens)
 components/providers/ AppProviders (MotionConfig), SmoothScrollProvider (Lenis + anchor links, useSmoothScroll)
-components/layout/    Navbar, MobileMenu, Logo, SectionLink, Footer, BackToTop, ScrollProgress, CustomCursor
+components/layout/    Navbar, MobileMenu, Logo, SectionLink, Footer, BackToTop, ScrollProgress, CustomCursor,
+                      IntroLoader (first-visit "LB" loader + inline head script)
 components/ui/        Primitives: Reveal, SectionHeading, MagneticButton, CountUp, FallbackImage,
-                      ProfileImage/ProfileAvatar, ProjectCover
+                      ProfileImage/ProfileAvatar, ProjectCover, SpotlightCard, Toast,
+                      TechIcon/IssuerLogo + IconSprite (brand icons via one SVG sprite)
 components/sections/  Page sections: Hero, About, Experience, Projects, Skills, Certificates (+ Extras), Contact
                       with sub-parts in hero/, about/, experience/, skills/, certificates/, contact/
 components/projects/  Project cards, filter explorer, detail page, diagrams, gallery/lightbox
@@ -26,7 +28,11 @@ app/projects/[slug]/  Static case-study pages (generateStaticParams, dynamicPara
 app/template.tsx      Page enter transition (client-side navigations only)
 lib/                  Small helpers: highlight.tsx (phrase + metric highlighting),
                       techIcons.ts (tech/issuer name → brand icon; unmapped names render as mono pills)
-hooks/                useActiveSection, usePrefersReducedMotion, useFinePointer
+hooks/                useActiveSection, usePrefersReducedMotion, useFinePointer, useFocusTrap
+scripts/              gen-assets.mjs (prebuild/predev: indexes public/ images → lib/assets.generated.ts),
+                      fix-next-font-windows.mjs (postinstall: Windows-only Next.js font-preload fix)
+app/sitemap.ts, robots.ts, manifest.ts, not-found.tsx, icon.png, apple-icon.png, favicon.ico
+data/seo.ts           Site URL, title/description/keywords, OG image, JSON-LD Person
 data/portfolio.ts     ALL personal content (identity, experience, skills, certificates…)
 data/projects.ts      ALL projects (typed Project interface)
 data/site.ts          Nav links + section labels ("02 — EXPERIENCE"), UI labels
@@ -93,6 +99,27 @@ Premium, dark, modern AI-engineer aesthetic (Linear / Vercel style).
   or `filter` (Reveal, the page transition) break `position: fixed`.
 - Adding a project must never require component changes: everything is driven by `data/projects.ts`.
 - Browser-only code (Lenis, window) goes in `"use client"` components inside `useEffect`.
+
+## SEO
+
+- All SEO text lives in `data/seo.ts` (mirrors CONTENT.md → "SEO"). Root metadata in `app/layout.tsx`,
+  per-project metadata in `app/projects/[slug]/page.tsx` (uses the project cover as OG image once it exists).
+- `SITE_URL` = `NEXT_PUBLIC_SITE_URL` → Netlify's build-time `URL` → localhost. Absolute URLs (canonical,
+  OG, sitemap, robots) are baked in at build time, so a local build contains localhost URLs.
+- `public/og-image.png` (1200×630) and the icon set are static; regenerate them if the name/title changes.
+
+## Performance rules (Lighthouse 90+ mobile)
+
+- The hero entrance is **CSS** (`.hero-enter` / `.hero-letter`), not motion: it must start at first paint,
+  not after hydration. Don't move above-the-fold content back to JS-driven entrance animations.
+- The intro loader's logo is an inlined image on purpose (it is the LCP; gradient/transparent text is
+  ignored by LCP and web-font text re-renders on swap).
+- Below-the-fold sections carry `cv-auto` (content-visibility). Programmatic scrolling adds
+  `html.cv-visible` first so targets are measured with real heights.
+- Brand icons go through `TechIcon`/`IssuerLogo` (sprite `<use>`), never raw react-icons in repeated lists.
+- Phones/touch: no backdrop-filter on `.glass`, no continuous gradient-border/node-glow animations.
+- Above-the-fold images: `priority` on FallbackImage/ProjectCover. Everything else stays lazy.
+- Images missing from public/ are never requested (gen-assets index) — no 404s in the console.
 
 ## Contact form
 

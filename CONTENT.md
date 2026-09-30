@@ -20,6 +20,12 @@
 
 Available for opportunities
 
+## SEO
+
+- **Title:** Louay Bannani — Data Scientist & AI/ML Engineer
+- **Description:** first sentence of the Summary below
+- **Social image:** name, "Data Scientist & AI/ML Engineer", tags LLMs & Agents · Machine Learning · Deep Learning · MLOps
+
 ## Summary
 
 AI & Data Science engineer who builds end-to-end intelligent systems, from data pipelines and forecasting models to LLM-powered multi-agent assistants deployed on real business channels. Delivered PrediBot, a multi-agent restaurant-operations platform (six MCP sub-agents, 21 n8n workflows, Prophet forecasting service, WhatsApp integration), and a CNN-based invoice OCR pipeline with financial anomaly detection. Strong in Python, deep learning, RAG, time series and REST API integration, with full-stack experience in Laravel, MySQL and Vue.js.

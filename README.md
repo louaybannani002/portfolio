@@ -11,6 +11,9 @@ npm run build   # static site in out/
 **Netlify:** build command `npm run build`, publish directory `out`, and the environment variable
 `NEXT_PUBLIC_WEB3FORMS_KEY` (your free key from https://web3forms.com) for the contact form.
 
+Optional: `NEXT_PUBLIC_SITE_URL` for a custom domain (otherwise Netlify's own URL is used for
+canonical/Open Graph/sitemap URLs).
+
 **Local contact form:** copy `.env.example` to `.env.local`, paste the key, then restart `npm run dev`.
 
 - Content: `CONTENT.md` → `data/portfolio.ts`, `data/projects.ts`

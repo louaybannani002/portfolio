@@ -7,6 +7,7 @@ import { createPortal } from "react-dom";
 import { FallbackImage } from "@/components/ui/FallbackImage";
 import { useSmoothScroll } from "@/components/providers/SmoothScrollProvider";
 import { projectLabels } from "@/data/site";
+import { useFocusTrap } from "@/hooks/useFocusTrap";
 
 interface GalleryProps {
   images: string[];
@@ -30,9 +31,11 @@ export function Gallery({ images, title }: GalleryProps) {
   const { setLocked } = useSmoothScroll();
   const thumbRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const closeRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
   const lastIndex = useRef(0);
   const count = images.length;
   const open = index !== null;
+  useFocusTrap(dialogRef, open);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => setMounted(true), []);
@@ -119,6 +122,7 @@ export function Gallery({ images, title }: GalleryProps) {
           <AnimatePresence>
             {open && (
               <motion.div
+                ref={dialogRef}
                 role="dialog"
                 aria-modal="true"
                 aria-label={alt(index)}

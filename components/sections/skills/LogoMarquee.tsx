@@ -1,9 +1,9 @@
 import type { CSSProperties } from "react";
 import { skills } from "@/data/portfolio";
-import { getTechIcon } from "@/lib/techIcons";
+import { TechIcon, hasTechIcon } from "@/components/ui/TechIcon";
 
 // Unique technologies that have a logo, in data order
-const logos = [...new Set(skills.flatMap((c) => c.skills))].filter((name) => getTechIcon(name));
+const logos = [...new Set(skills.flatMap((c) => c.skills))].filter(hasTechIcon);
 const half = Math.ceil(logos.length / 2);
 const rows = [logos.slice(0, half), logos.slice(half)];
 
@@ -20,17 +20,14 @@ function Row({ items, reverse, duration }: { items: string[]; reverse: boolean; 
         }
       >
         {/* Content is doubled so translateX(-50%) loops seamlessly; spacing is padding, not gap */}
-        {[...items, ...items].map((name, i) => {
-          const Icon = getTechIcon(name)!;
-          return (
-            <span key={`${name}-${i}`} className="shrink-0 pr-3">
-              <span className="glass inline-flex items-center gap-2.5 rounded-pill px-4 py-2 text-sm whitespace-nowrap text-muted">
-                <Icon className="h-4 w-4 text-foreground/80" />
-                {name}
-              </span>
+        {[...items, ...items].map((name, i) => (
+          <span key={`${name}-${i}`} className="shrink-0 pr-3">
+            <span className="glass inline-flex items-center gap-2.5 rounded-pill px-4 py-2 text-sm whitespace-nowrap text-muted">
+              <TechIcon name={name} className="h-4 w-4 text-foreground/80" />
+              {name}
             </span>
-          );
-        })}
+          </span>
+        ))}
       </div>
     </div>
   );

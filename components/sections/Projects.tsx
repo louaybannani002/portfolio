@@ -6,7 +6,7 @@ export function Projects() {
     <section
       id="projects"
       aria-labelledby="projects-heading"
-      className="mx-auto max-w-content px-gutter py-section"
+      className="mx-auto max-w-content px-gutter py-section cv-auto"
     >
       <SectionHeading section="projects" />
       <ProjectsExplorer />

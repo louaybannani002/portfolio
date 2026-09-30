@@ -23,7 +23,7 @@ export function About() {
     <section
       id="about"
       aria-labelledby="about-heading"
-      className="mx-auto max-w-content px-gutter py-section"
+      className="mx-auto max-w-content px-gutter py-section cv-auto"
     >
       <SectionHeading section="about" />
 

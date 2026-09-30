@@ -75,6 +75,9 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
       // Unlock first (e.g. link clicked inside the open mobile menu)
       setLocked(false);
 
+      // Render all content-visibility sections so positions use real heights (see .cv-auto)
+      document.documentElement.classList.add("cv-visible");
+
       // Absolute position minus navbar height (don't rely on scroll-margin-top: Lenis adds it too)
       const top = el ? Math.max(0, el.getBoundingClientRect().top + window.scrollY - navOffset()) : 0;
       const instance = lenisRef.current;

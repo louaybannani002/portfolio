@@ -1,6 +1,6 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { CountUp } from "@/components/ui/CountUp";
 import { ProjectCover } from "@/components/ui/ProjectCover";
 import { Reveal } from "@/components/ui/Reveal";
@@ -95,8 +95,17 @@ function buildSections(project: Project): DetailSectionDef[] {
   return sections.filter((s): s is DetailSectionDef => !!s);
 }
 
+/** CSS entrance (see `.hero-enter` in globals.css): starts at first paint, so the LCP isn't gated on hydration. */
+const enter = (i: number) => ({
+  className: "hero-enter",
+  style: { "--d": `${(i * 0.08).toFixed(2)}s` } as CSSProperties,
+});
+
 function DetailHero({ project }: { project: Project }) {
   const meta = [project.category, project.year].filter(Boolean).join(" · ");
+  // Only rendered items take a stagger slot
+  let slot = 0;
+  const next = () => enter(slot++);
   return (
     <header className="relative isolate overflow-hidden pt-[calc(var(--nav-height)+2.5rem)] pb-12 sm:pb-16">
       <div
@@ -112,35 +121,52 @@ function DetailHero({ project }: { project: Project }) {
           {projectLabels.backToProjects}
         </Link>
 
-        <Reveal stagger={0.08} className="mt-10 max-w-4xl">
-          {meta && <p className="label-mono text-muted">{meta}</p>}
-          <h1 className="mt-4 font-display text-[clamp(2.5rem,7vw,5rem)] leading-[1.02] font-semibold tracking-[-0.03em] text-foreground">
-            {project.title}
-          </h1>
-          {project.context && <p className="mt-4 text-lg text-muted">{project.context}</p>}
-          {project.tagline && (
-            <p className="mt-5 max-w-2xl text-xl leading-relaxed text-pretty text-foreground/85">{project.tagline}</p>
+        <div className="mt-10 max-w-4xl">
+          {meta && (
+            <p {...next()}>
+              <span className="label-mono text-muted">{meta}</span>
+            </p>
           )}
-          {project.metrics.length > 0 && (
-            <div className="mt-7 flex flex-wrap gap-2">
-              {project.metrics.map((m) => (
-                <MetricBadge key={m.label} metric={m} />
-              ))}
+          <div {...next()}>
+            <h1 className="mt-4 font-display text-[clamp(2.5rem,7vw,5rem)] leading-[1.02] font-semibold tracking-[-0.03em] text-foreground">
+              {project.title}
+            </h1>
+          </div>
+          {project.context && (
+            <div {...next()}>
+              <p className="mt-4 text-lg text-muted">{project.context}</p>
             </div>
           )}
-          <TechPills items={project.techStack} className="mt-6" />
-          <ProjectLinks project={project} showCaseStudy={false} className="mt-8" />
-        </Reveal>
+          {project.tagline && (
+            <div {...next()}>
+              <p className="mt-5 max-w-2xl text-xl leading-relaxed text-pretty text-foreground/85">{project.tagline}</p>
+            </div>
+          )}
+          {project.metrics.length > 0 && (
+            <div {...next()}>
+              <div className="mt-7 flex flex-wrap gap-2">
+                {project.metrics.map((m) => (
+                  <MetricBadge key={m.label} metric={m} />
+                ))}
+              </div>
+            </div>
+          )}
+          <div {...next()}>
+            <TechPills items={project.techStack} className="mt-6" />
+            <ProjectLinks project={project} showCaseStudy={false} className="mt-8" />
+          </div>
+        </div>
 
-        <Reveal y={40} className="mt-12 sm:mt-16">
-          <div className="gradient-border rounded-card p-px shadow-[0_40px_120px_-40px_rgb(59_130_246/0.4)]">
+        <div {...enter(slot + 1)}>
+          <div className="gradient-border mt-12 rounded-card p-px shadow-[0_40px_120px_-40px_rgb(59_130_246/0.4)] sm:mt-16">
             <ProjectCover
               project={project}
               aspect="aspect-video lg:aspect-[21/9]"
+              priority
               className="rounded-[calc(var(--radius-card)-1px)]"
             />
           </div>
-        </Reveal>
+        </div>
       </div>
     </header>
   );

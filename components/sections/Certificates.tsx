@@ -3,14 +3,17 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { certificates, type Certificate } from "@/data/portfolio";
 import { certificateLabels } from "@/data/site";
-import { getIssuerIcon } from "@/lib/techIcons";
+import { IssuerLogo, hasIssuerLogo } from "@/components/ui/TechIcon";
 import { Extras } from "./certificates/Extras";
 
 const issuers = [...new Set(certificates.map((c) => c.issuer).filter(Boolean))];
 
 function IssuerIcon({ issuer, className }: { issuer: string; className?: string }) {
-  const Icon = getIssuerIcon(issuer) ?? Award;
-  return <Icon aria-hidden className={className} />;
+  return hasIssuerLogo(issuer) ? (
+    <IssuerLogo issuer={issuer} className={className} />
+  ) : (
+    <Award aria-hidden className={className} />
+  );
 }
 
 /** Leading tile: total count + issuer logos. Also rounds the grid out to full rows of 4. */
@@ -82,7 +85,7 @@ export function Certificates() {
     <section
       id="certificates"
       aria-labelledby="certificates-heading"
-      className="mx-auto max-w-content px-gutter py-section"
+      className="mx-auto max-w-content px-gutter py-section cv-auto"
     >
       <SectionHeading section="certificates" />
 

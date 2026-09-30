@@ -5,7 +5,9 @@ import { CustomCursor } from "@/components/layout/CustomCursor";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { ScrollProgress } from "@/components/layout/ScrollProgress";
-import { identity, summary } from "@/data/portfolio";
+import { IntroLoader, introScript } from "@/components/layout/IntroLoader";
+import { identity } from "@/data/portfolio";
+import { OG_IMAGE, SITE_URL, siteDescription, siteKeywords, siteTitle } from "@/data/seo";
 import "./globals.css";
 
 const inter = Inter({
@@ -27,8 +29,31 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: `${identity.name} — ${identity.title}`,
-  description: summary,
+  metadataBase: new URL(SITE_URL),
+  title: { default: siteTitle, template: `%s — ${identity.name}` },
+  description: siteDescription,
+  keywords: siteKeywords,
+  authors: [{ name: identity.name, url: SITE_URL }],
+  creator: identity.name,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "profile",
+    url: "/",
+    siteName: identity.name,
+    title: siteTitle,
+    description: siteDescription,
+    locale: "en_US",
+    images: [OG_IMAGE],
+    firstName: identity.firstName,
+    lastName: identity.lastName,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+    images: [OG_IMAGE.url],
+  },
+  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
@@ -42,7 +67,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}>
+    // suppressHydrationWarning: the intro script sets data-intro on <html> before hydration
+    <html
+      lang="en"
+      className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        {/* Decides before first paint whether the intro loader shows (first visit per session) */}
+        <script dangerouslySetInnerHTML={{ __html: introScript }} />
+      </head>
       <body className="bg-background font-sans text-foreground antialiased">
         <a
           href="#main"
@@ -50,6 +84,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <IntroLoader />
         <AppProviders>
           <ScrollProgress />
           <Navbar />

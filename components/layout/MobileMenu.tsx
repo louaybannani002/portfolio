@@ -5,6 +5,7 @@ import { motion, type Variants } from "motion/react";
 import { useEffect, useRef } from "react";
 import { CV_PATH, identity } from "@/data/portfolio";
 import { downloadCvLabel, navLinks } from "@/data/site";
+import { useFocusTrap } from "@/hooks/useFocusTrap";
 import { SectionLink } from "./SectionLink";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -35,6 +36,9 @@ interface MobileMenuProps {
 /** Full-screen mobile navigation. Scroll lock is handled by Navbar via SmoothScrollProvider. */
 export function MobileMenu({ active, onClose }: MobileMenuProps) {
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  // The close control is the navbar toggle (outside the panel), so include it in the cycle
+  useFocusTrap(panelRef, true, '[aria-controls="mobile-menu"]');
 
   useEffect(() => {
     firstLinkRef.current?.focus({ preventScroll: true });
@@ -45,6 +49,7 @@ export function MobileMenu({ active, onClose }: MobileMenuProps) {
 
   return (
     <motion.div
+      ref={panelRef}
       id="mobile-menu"
       role="dialog"
       aria-modal="true"

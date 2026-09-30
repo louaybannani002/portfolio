@@ -46,6 +46,14 @@ export const projectLabels = {
   },
 };
 
+export const notFoundLabels = {
+  code: "404",
+  title: "Page not found",
+  text: "The page you're looking for doesn't exist or has moved.",
+  home: "Back home",
+  projects: "View projects",
+};
+
 export const contactLabels = {
   channels: {
     email: "Email",

@@ -78,3 +78,13 @@ const ISSUER_ICONS: Record<string, IconType> = {
 };
 
 export const getIssuerIcon = (issuer: string): IconType | undefined => ISSUER_ICONS[issuer];
+
+/** Stable sprite symbol id for a tech/issuer name, e.g. "GitHub Actions (CI/CD)" → "ti-github-actions-ci-cd". */
+export const iconId = (name: string) =>
+  "ti-" + name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+/** Every mapped icon, for the SVG sprite (each path is emitted once per page). */
+export const ALL_ICONS: [id: string, icon: IconType][] = [
+  ...Object.entries(TECH_ICONS),
+  ...Object.entries(ISSUER_ICONS),
+].map(([name, icon]) => [iconId(name), icon]);

@@ -56,7 +56,8 @@ export default function NeuralNetworkCanvas({ className = "" }: { className?: st
       const rect = parent.getBoundingClientRect();
       width = rect.width;
       height = rect.height;
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      // Phones: 1× pixel density (4× fewer pixels to fill on a 2× screen)
+      const dpr = width < 768 ? 1 : Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
       canvas.style.width = `${width}px`;
@@ -159,10 +160,13 @@ export default function NeuralNetworkCanvas({ className = "" }: { className?: st
       }
     };
 
+    // Phones: ~30fps is plenty for slow drifting nodes and halves the work
+    let skip = false;
     const loop = () => {
+      raf = requestAnimationFrame(loop);
+      if (width < 768 && (skip = !skip)) return;
       step();
       draw();
-      raf = requestAnimationFrame(loop);
     };
 
     const start = () => {
