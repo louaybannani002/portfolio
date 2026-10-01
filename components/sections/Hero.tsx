@@ -14,7 +14,8 @@ import { ScrollIndicator } from "./hero/ScrollIndicator";
 const socials = [
   { label: socialLabels.github, href: identity.github.url, icon: FaGithub, external: true },
   { label: socialLabels.linkedin, href: identity.linkedin.url, icon: FaLinkedinIn, external: true },
-  { label: socialLabels.email, href: `mailto:${identity.email}`, icon: Mail, external: false },
+  // Scrolls to the Contact section (address + copy button + form): mailto: does nothing without a mail app
+  { label: socialLabels.email, href: "#contact", icon: Mail, external: false },
 ];
 
 /**

@@ -6,10 +6,12 @@ import { BackToTop } from "./BackToTop";
 import { SectionLink } from "./SectionLink";
 
 const socials = [
-  { label: socialLabels.github, href: identity.github.url, icon: FaGithub, external: true },
-  { label: socialLabels.linkedin, href: identity.linkedin.url, icon: FaLinkedinIn, external: true },
-  { label: socialLabels.email, href: `mailto:${identity.email}`, icon: Mail, external: false },
+  { label: socialLabels.github, href: identity.github.url, icon: FaGithub },
+  { label: socialLabels.linkedin, href: identity.linkedin.url, icon: FaLinkedinIn },
 ];
+
+const SOCIAL_CLASS =
+  "glass flex h-10 w-10 items-center justify-center rounded-pill text-muted transition-colors hover:border-border-strong hover:text-foreground";
 
 // Static export: the year is fixed at build time
 const YEAR = new Date().getFullYear();
@@ -27,19 +29,31 @@ export function Footer() {
           <p className="font-display font-semibold text-foreground">{identity.name}</p>
           <p className="mt-4 text-sm leading-relaxed text-muted">{footerText || identity.title}</p>
           <ul className="mt-6 flex gap-2">
-            {socials.map(({ label, href, icon: Icon, external }) => (
+            {socials.map(({ label, href, icon: Icon }) => (
               <li key={label}>
                 <a
                   href={href}
                   aria-label={label}
                   title={label}
-                  {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className="glass flex h-10 w-10 items-center justify-center rounded-pill text-muted transition-colors hover:border-border-strong hover:text-foreground"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={SOCIAL_CLASS}
                 >
                   <Icon aria-hidden className="h-4 w-4" />
                 </a>
               </li>
             ))}
+            {/* Email → Contact section (works from any page; mailto: does nothing without a mail app) */}
+            <li>
+              <SectionLink
+                section="contact"
+                aria-label={socialLabels.email}
+                title={socialLabels.email}
+                className={SOCIAL_CLASS}
+              >
+                <Mail aria-hidden className="h-4 w-4" />
+              </SectionLink>
+            </li>
           </ul>
         </div>
 
