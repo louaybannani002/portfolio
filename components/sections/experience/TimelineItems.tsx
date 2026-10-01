@@ -1,8 +1,7 @@
-import { ArrowUp, CalendarDays, GraduationCap, MapPin } from "lucide-react";
+import { ArrowUp, CalendarDays, MapPin } from "lucide-react";
 import type { ReactNode } from "react";
 import { Reveal } from "@/components/ui/Reveal";
-import type { Education, Experience } from "@/data/portfolio";
-import { experienceLabels } from "@/data/site";
+import type { Experience } from "@/data/portfolio";
 import { highlightMetrics } from "@/lib/highlight";
 import { TimelineNode } from "./TimelineNode";
 
@@ -109,38 +108,6 @@ export function ProgressionItem({ label, detail }: { label: string; detail: stri
           <span className="font-medium text-foreground">{label}</span>
           <span className="font-mono text-xs text-muted">{detail}</span>
         </p>
-      </Reveal>
-    </li>
-  );
-}
-
-export function EducationItem({ edu }: { edu: Education }) {
-  return (
-    <li className={ROW}>
-      <TimelineNode className="top-6">
-        <GraduationCap className="h-[18px] w-[18px] text-foreground" />
-      </TimelineNode>
-      <DateColumn period={edu.period} />
-      <Reveal y={32}>
-        <article className={CARD}>
-          <header className="flex flex-wrap items-start justify-between gap-x-4 gap-y-3">
-            <div className="min-w-0">
-              <h3 className="font-display text-xl font-semibold tracking-tight text-foreground sm:text-2xl">
-                {edu.degree}
-              </h3>
-              <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-sm text-muted">
-                <span className="text-gradient text-base font-semibold">{edu.school}</span>
-                <MetaItem icon={MapPin}>{edu.location}</MetaItem>
-                <MetaItem icon={CalendarDays} className="md:hidden">
-                  {edu.period}
-                </MetaItem>
-              </p>
-            </div>
-            <span className="label-mono shrink-0 rounded-pill border border-accent-2/30 bg-accent-2/10 px-3 py-1 text-[0.7rem] text-foreground/90">
-              {experienceLabels.education}
-            </span>
-          </header>
-        </article>
       </Reveal>
     </li>
   );

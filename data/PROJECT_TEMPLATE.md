@@ -63,7 +63,7 @@ one of the `coming-soon-N` slots with it.
 | `year` | yes | A string, so `"2025–2026"` works. |
 | `context` | no | Where or why it was built. |
 | `status` | yes | `coming-soon` shows a teaser card with no detail page. |
-| `featured` | yes | Keep about 3 featured projects. |
+| `featured` | yes | Only PrediBot is featured; other projects go under "More projects". |
 | `filters` | yes | Any of `llm-agents`, `computer-vision`, `deep-learning`, `forecasting`, `nlp-recsys`. A tab is hidden when no published project uses it. |
 | `overview` / `problem` / `solution` | no | Case-study sections. Empty strings are hidden. Separate paragraphs with a blank line (`
 

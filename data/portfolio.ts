@@ -28,11 +28,6 @@ export interface Identity {
   github: SocialLink;
 }
 
-export interface Stat {
-  value: string;
-  label: string;
-}
-
 export interface Experience {
   id: string;
   role: string;
@@ -148,17 +143,6 @@ export const tagline = "";
 
 export const summary =
   "AI & Data Science engineer who builds end-to-end intelligent systems, from data pipelines and forecasting models to LLM-powered multi-agent assistants deployed on real business channels. Delivered PrediBot, a multi-agent restaurant-operations platform (six MCP sub-agents, 21 n8n workflows, Prophet forecasting service, WhatsApp integration), and a CNN-based invoice OCR pipeline with financial anomaly detection. Strong in Python, deep learning, RAG, time series and REST API integration, with full-stack experience in Laravel, MySQL and Vue.js.";
-
-/**
- * About-section stats (numbers verbatim from the CV; selection chosen by Louay).
- * The 91% speech-emotion accuracy lives in data/projects.ts.
- */
-export const stats: Stat[] = [
-  { value: "6", label: "MCP sub-agents" },
-  { value: "21", label: "n8n workflows" },
-  { value: "93%", label: "OCR field-level accuracy" },
-  { value: "9%", label: "Forecast error (MAPE)" },
-];
 
 /** Phrases from the summary rendered with emphasis (styling only — text unchanged). */
 export const summaryHighlights: string[] = [

@@ -1,8 +1,7 @@
 import { GraduationCap, Languages, MapPin, type LucideIcon } from "lucide-react";
-import { CountUp } from "@/components/ui/CountUp";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { education, identity, languages, stats, summary, summaryHighlights } from "@/data/portfolio";
+import { education, identity, languages, summary, summaryHighlights } from "@/data/portfolio";
 import { highlightPhrases } from "@/lib/highlight";
 import { PhotoFrame } from "./about/PhotoFrame";
 
@@ -39,28 +38,7 @@ export function About() {
             </p>
           </Reveal>
 
-          {stats.length > 0 && (
-            <Reveal as="ul" stagger className="mt-10 grid grid-cols-2 gap-3 sm:gap-4">
-              {stats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="glass group relative h-full overflow-hidden rounded-card p-5 transition-colors duration-300 hover:border-border-strong sm:p-6"
-                >
-                  <div
-                    aria-hidden
-                    className="bg-accent-gradient absolute -top-10 -right-10 h-24 w-24 rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-30"
-                  />
-                  <CountUp
-                    value={stat.value}
-                    className="block font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl"
-                  />
-                  <span className="mt-2 block text-sm text-muted">{stat.label}</span>
-                </div>
-              ))}
-            </Reveal>
-          )}
-
-          <Reveal as="ul" stagger={0.05} className="mt-8 flex flex-wrap gap-2">
+          <Reveal as="ul" stagger={0.05} className="mt-10 flex flex-wrap gap-2">
             {chips.map(({ icon: Icon, label }) => (
               <span
                 key={label}

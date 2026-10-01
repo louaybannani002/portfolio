@@ -59,7 +59,7 @@ export function MobileMenu({ active, onClose }: MobileMenuProps) {
       animate="visible"
       exit="exit"
       data-lenis-prevent
-      className="fixed inset-0 z-40 flex flex-col overflow-y-auto bg-background/95 px-gutter pt-[calc(var(--nav-height)+2rem)] pb-10 backdrop-blur-2xl md:hidden"
+      className="fixed inset-0 z-40 flex flex-col overflow-y-auto bg-background/95 px-gutter pt-[calc(var(--nav-height)+2rem)] pb-10 backdrop-blur-2xl lg:hidden"
     >
       <div
         aria-hidden

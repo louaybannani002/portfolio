@@ -37,7 +37,7 @@ export function Navbar() {
 
   // Close the mobile menu when resizing up to desktop
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)");
+    const mq = window.matchMedia("(min-width: 1024px)");
     const onChange = () => mq.matches && setMenuOpen(false);
     mq.addEventListener("change", onChange);
     return () => mq.removeEventListener("change", onChange);
@@ -69,7 +69,7 @@ export function Navbar() {
           >
             <Logo onClick={() => closeMenu()} />
 
-            <ul className="hidden items-center gap-1 md:flex">
+            <ul className="hidden items-center gap-1 lg:flex">
               {navLinks.map((link) => {
                 const isActive = active === link.id;
                 return (
@@ -114,7 +114,7 @@ export function Navbar() {
                 aria-expanded={menuOpen}
                 aria-controls="mobile-menu"
                 aria-label={menuOpen ? "Close menu" : "Open menu"}
-                className="glass relative flex h-10 w-10 items-center justify-center rounded-pill md:hidden"
+                className="glass relative flex h-10 w-10 items-center justify-center rounded-pill lg:hidden"
               >
                 <motion.span
                   aria-hidden

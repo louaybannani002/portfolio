@@ -174,7 +174,7 @@ export const projects: Project[] = [
     year: "2025",
     context: "Internship — Proxym",
     status: "published",
-    featured: true,
+    featured: false,
     filters: ["computer-vision", "deep-learning"],
     overview: "", // TODO (CONTENT.md → Missing)
     problem: "", // TODO (CONTENT.md → Missing)
@@ -201,7 +201,7 @@ export const projects: Project[] = [
     year: "2025",
     context: "",
     status: "published",
-    featured: true,
+    featured: false,
     filters: ["llm-agents", "nlp-recsys"],
     overview: "", // TODO (CONTENT.md → Missing)
     problem: "", // TODO (CONTENT.md → Missing)

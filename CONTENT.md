@@ -30,13 +30,6 @@ Available for opportunities
 
 AI & Data Science engineer who builds end-to-end intelligent systems, from data pipelines and forecasting models to LLM-powered multi-agent assistants deployed on real business channels. Delivered PrediBot, a multi-agent restaurant-operations platform (six MCP sub-agents, 21 n8n workflows, Prophet forecasting service, WhatsApp integration), and a CNN-based invoice OCR pipeline with financial anomaly detection. Strong in Python, deep learning, RAG, time series and REST API integration, with full-stack experience in Laravel, MySQL and Vue.js.
 
-## About stats
-
-- 6 — MCP sub-agents
-- 21 — n8n workflows
-- 93% — OCR field-level accuracy
-- 9% — Forecast error (MAPE)
-
 ## About info chips
 
 - Tunisia
@@ -74,7 +67,7 @@ AI & Data Science engineer who builds end-to-end intelligent systems, from data 
 
 ---
 
-## Education
+## Education (own section, after Experience)
 
 - **School:** École Pluridisciplinaire Internationale (EPI)
 - **Location:** Sousse, Tunisia
@@ -115,6 +108,10 @@ Stack (from those bullets): CNN (deep learning), OpenCV, JSON export.
 
 ### 6. Time Series Forecasting | Python, ARIMA, SARIMA, Prophet (2023)
 - Applied decomposition and stationarity testing, then benchmarked ARIMA, SARIMA, and Prophet using RMSE and MAE to select the best model.
+
+### Featured
+
+Only PrediBot is shown as a large featured card. All other projects appear under "More projects".
 
 ### Filter tabs
 

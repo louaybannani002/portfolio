@@ -37,7 +37,7 @@ All text on the site comes from two data files. Components never contain persona
 
 1. **`CONTENT.md`** is the source of truth. Edit it first, so it always reflects what's on the site.
 2. Mirror the change in:
-   - **`data/portfolio.ts`**: identity, hero, summary, stats, experience, education, skills, certificates,
+   - **`data/portfolio.ts`**: identity, hero, summary, experience, education, skills, certificates,
      languages, soft skills, associative life, contact text, footer text
    - **`data/projects.ts`**: projects (cards, filters, case-study pages)
    - `data/site.ts`: navigation and UI labels · `data/seo.ts`: page title, description and keywords

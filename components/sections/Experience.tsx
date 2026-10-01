@@ -1,10 +1,10 @@
 import { Fragment } from "react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { education, experiences } from "@/data/portfolio";
-import { EducationItem, ExperienceItem, ProgressionItem } from "./experience/TimelineItems";
+import { experiences } from "@/data/portfolio";
+import { ExperienceItem, ProgressionItem } from "./experience/TimelineItems";
 import { TimelineRail } from "./experience/TimelineRail";
 
-/** Newest-first timeline of experiences, ending with education. */
+/** Newest-first timeline of experiences (education has its own section). */
 export function Experience() {
   return (
     <section
@@ -23,9 +23,6 @@ export function Experience() {
                 <ProgressionItem label={exp.progression.label} detail={exp.progression.detail} />
               )}
             </Fragment>
-          ))}
-          {education.map((edu) => (
-            <EducationItem key={edu.school} edu={edu} />
           ))}
         </ol>
       </TimelineRail>

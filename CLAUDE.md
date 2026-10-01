@@ -21,7 +21,7 @@ components/layout/    Navbar, MobileMenu, Logo, SectionLink, Footer, BackToTop, 
 components/ui/        Primitives: Reveal, SectionHeading, MagneticButton, CountUp, FallbackImage,
                       ProfileImage/ProfileAvatar, ProjectCover, SpotlightCard, Toast,
                       TechIcon/IssuerLogo + IconSprite (brand icons via one SVG sprite)
-components/sections/  Page sections: Hero, About, Experience, Projects, Skills, Certificates (+ Extras), Contact
+components/sections/  Page sections: Hero, About, Experience, Education, Projects, Skills, Certificates (+ Extras), Contact
                       with sub-parts in hero/, about/, experience/, skills/, certificates/, contact/
 components/projects/  Project cards, filter explorer, detail page, diagrams, gallery/lightbox
 app/projects/[slug]/  Static case-study pages (generateStaticParams, dynamicParams = false)
