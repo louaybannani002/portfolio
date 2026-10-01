@@ -6,6 +6,7 @@ import { ProjectCover } from "@/components/ui/ProjectCover";
 import { Reveal } from "@/components/ui/Reveal";
 import { getAdjacentProjects, publishedProjects, type Project } from "@/data/projects";
 import { projectLabels } from "@/data/site";
+import { PUBLIC_IMAGES } from "@/lib/assets.generated";
 import { highlightMetrics } from "@/lib/highlight";
 import { ArchitectureDiagram } from "./ArchitectureDiagram";
 import { Gallery } from "./Gallery";
@@ -159,12 +160,25 @@ function DetailHero({ project }: { project: Project }) {
 
         <div {...enter(slot + 1)}>
           <div className="gradient-border mt-12 rounded-card p-px shadow-[0_40px_120px_-40px_rgb(59_130_246/0.4)] sm:mt-16">
-            <ProjectCover
-              project={project}
-              aspect="aspect-video lg:aspect-[21/9]"
-              priority
-              className="rounded-[calc(var(--radius-card)-1px)]"
-            />
+            {project.demoVideo ? (
+              // Demo replaces the cover; the cover (if present) becomes the poster frame
+              <video
+                src={project.demoVideo}
+                poster={PUBLIC_IMAGES.has(project.coverImage) ? project.coverImage : undefined}
+                controls
+                playsInline
+                preload="metadata"
+                aria-label={`${project.title} — ${projectLabels.demoVideo}`}
+                className="block aspect-video w-full rounded-[calc(var(--radius-card)-1px)] bg-black object-contain"
+              />
+            ) : (
+              <ProjectCover
+                project={project}
+                aspect="aspect-video lg:aspect-[21/9]"
+                priority
+                className="rounded-[calc(var(--radius-card)-1px)]"
+              />
+            )}
           </div>
         </div>
       </div>

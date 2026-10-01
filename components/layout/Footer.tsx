@@ -3,7 +3,6 @@ import { FaGithub, FaLinkedinIn } from "react-icons/fa6";
 import { footerText, identity } from "@/data/portfolio";
 import { footerLabels, navLinks, socialLabels } from "@/data/site";
 import { BackToTop } from "./BackToTop";
-import { Logo } from "./Logo";
 import { SectionLink } from "./SectionLink";
 
 const socials = [
@@ -25,10 +24,7 @@ export function Footer() {
       />
       <div className="mx-auto grid max-w-content gap-10 px-gutter py-14 md:grid-cols-[1fr_auto] md:items-start">
         <div className="max-w-sm">
-          <div className="flex items-center gap-3">
-            <Logo />
-            <span className="font-display font-semibold text-foreground">{identity.name}</span>
-          </div>
+          <p className="font-display font-semibold text-foreground">{identity.name}</p>
           <p className="mt-4 text-sm leading-relaxed text-muted">{footerText || identity.title}</p>
           <ul className="mt-6 flex gap-2">
             {socials.map(({ label, href, icon: Icon, external }) => (

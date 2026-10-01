@@ -83,6 +83,8 @@ export interface Project {
   demoUrl: string;
   /** public/projects/<slug>/cover.jpg — missing file → generated placeholder */
   coverImage: string;
+  /** public/projects/<slug>/demo.mp4 — shown instead of the cover on the case-study page */
+  demoVideo?: string;
   /** public/projects/<slug>/1.jpg, 2.jpg, ... */
   gallery: string[];
 }
@@ -164,6 +166,7 @@ export const projects: Project[] = [
     githubUrl: "",
     demoUrl: "",
     coverImage: cover("predibot"),
+    demoVideo: "/projects/predibot/demo.mp4",
     gallery: [],
   },
   {

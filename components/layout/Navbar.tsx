@@ -7,7 +7,6 @@ import { CV_PATH } from "@/data/portfolio";
 import { downloadCvLabel, navLinks } from "@/data/site";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import { useSmoothScroll } from "@/components/providers/SmoothScrollProvider";
-import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
 import { SectionLink } from "./SectionLink";
 
@@ -67,8 +66,6 @@ export function Navbar() {
             aria-label="Main"
             className="mx-auto flex h-nav max-w-content items-center justify-between px-gutter"
           >
-            <Logo onClick={() => closeMenu()} />
-
             <ul className="hidden items-center gap-1 lg:flex">
               {navLinks.map((link) => {
                 const isActive = active === link.id;
@@ -96,7 +93,7 @@ export function Navbar() {
               })}
             </ul>
 
-            <div className="flex items-center gap-3">
+            <div className="ml-auto flex items-center gap-3">
               <a
                 href={CV_PATH}
                 download="Louay_Bannani_CV.pdf"

@@ -1,3 +1,6 @@
+# Original, uncompressed media (too large for GitHub) — compressed copies live in public/
+/media-src/
+
 # dependencies
 /node_modules
 /.pnp

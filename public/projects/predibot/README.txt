@@ -15,3 +15,8 @@ After adding gallery images, list them in data/projects.ts for slug "predibot":
 
 The cover path is already set:  coverImage: "/projects/predibot/cover.jpg"
 Want PNG/WebP instead? Change the extension in data/projects.ts too.
+
+  demo.mp4    Demo video shown at the top of the case-study page (instead of the cover;
+              cover.jpg is its poster frame). Compressed H.264 1080p, faststart.
+              GitHub rejects files > 100 MB: compress large recordings first.
+              The original recording is kept, untracked, in media-src/.

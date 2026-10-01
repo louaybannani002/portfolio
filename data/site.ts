@@ -42,6 +42,7 @@ export const projectLabels = {
   previous: "Previous project",
   next: "Next project",
   galleryEmpty: "Screenshots coming soon",
+  demoVideo: "Demo video",
   sections: {
     overview: "Overview",
     problem: "Problem",

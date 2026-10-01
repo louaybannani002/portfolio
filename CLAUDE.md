@@ -16,7 +16,7 @@ Personal portfolio of Louay Bannani (Data Science & AI/ML Engineer). It is a sta
 ```
 app/                  Routes (App Router). layout.tsx (fonts, providers, navbar), page.tsx, globals.css (tokens)
 components/providers/ AppProviders (MotionConfig), SmoothScrollProvider (Lenis + anchor links, useSmoothScroll)
-components/layout/    Navbar, MobileMenu, Logo, SectionLink, Footer, BackToTop, ScrollProgress, CustomCursor,
+components/layout/    Navbar, MobileMenu, SectionLink, Footer, BackToTop, ScrollProgress, CustomCursor,
                       IntroLoader (first-visit "LB" loader + inline head script)
 components/ui/        Primitives: Reveal, SectionHeading, MagneticButton, CountUp, FallbackImage,
                       ProfileImage/ProfileAvatar, ProjectCover, SpotlightCard, Toast,
@@ -39,7 +39,7 @@ data/projects.ts      ALL projects (typed Project interface)
 data/site.ts          Nav links + section labels ("02 — EXPERIENCE"), UI labels
 data/PROJECT_TEMPLATE.md  How to add a project
 public/images/profile.jpg Profile photo source → `npm run photo` → profile.webp (PROFILE_PHOTO)
-public/projects/<slug>/   cover.jpg, 1.jpg, 2.jpg… per project
+public/projects/<slug>/   cover.jpg, 1.jpg, 2.jpg… per project; optional demo.mp4 (H.264, faststart, keep < 100 MB for GitHub)
 public/Louay_Bannani_CV.pdf  Downloadable CV (CV_PATH)
 netlify.toml          Build (npm run build → out/, Node 20), caching + security headers
 CONTENT.md            Source of truth for all text

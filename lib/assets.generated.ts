@@ -5,5 +5,6 @@ export const PUBLIC_IMAGES: ReadonlySet<string> = new Set([
   "/images/intro-logo.webp",
   "/images/profile.jpg",
   "/images/profile.webp",
-  "/og-image.png"
+  "/og-image.png",
+  "/projects/predibot/cover.jpg"
 ]);
